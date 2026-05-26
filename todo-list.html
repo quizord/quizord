@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - Lokal Lagring</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        #todoInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        #todoInput:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-add {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-add:active {
+            transform: translateY(0);
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+        }
+
+        .stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .todo-list {
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .todo-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .todo-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            animation: fadeIn 0.3s ease-out;
+            transition: all 0.3s;
+            border-left: 4px solid #e0e0e0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .todo-item:hover {
+            background: #f0f0f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-item.completed {
+            opacity: 0.6;
+            border-left-color: #27ae60;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .todo-text {
+            flex: 1;
+            font-size: 1rem;
+            color: #333;
+            word-break: break-word;
+        }
+
+        .priority {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .priority.high {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .priority.medium {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .priority.low {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .btn-delete {
+            padding: 6px 12px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #ee5a52;
+        }
+
+        .btn-edit {
+            padding: 6px 12px;
+            background: #4ecdc4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+            margin-right: 5px;
+        }
+
+        .btn-edit:hover {
+            background: #45b8ae;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            min-width: 120px;
+        }
+
+        .btn-action:hover {
+            border-color: #667eea;
+            background: #f5f5f5;
+        }
+
+        .btn-action.danger {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .btn-action.danger:hover {
+            background: #ffe0e0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-input-group {
+            margin-bottom: 15px;
+        }
+
+        .modal-input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .modal-input-group input,
+        .modal-input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .modal-input-group input:focus,
+        .modal-input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .modal-buttons .btn-save {
+            background: #667eea;
+            color: white;
+        }
+
+        .modal-buttons .btn-save:hover {
+            background: #764ba2;
+        }
+
+        .modal-buttons .btn-cancel {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .modal-buttons .btn-cancel:hover {
+            background: #d0d0d0;
+        }
+
+        .close {
+            color: #999;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .filters {
+                justify-content: space-between;
+            }
+
+            .filter-btn {
+                flex: 1;
+                min-width: 70px;
+            }
+
+            .todo-item {
+                flex-wrap: wrap;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn-action {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 To-Do List</h1>
+        <p class="subtitle">Organiza dina uppgifter med lokal lagring</p>
+
+        <div class="input-group">
+            <input type="text" id="todoInput" placeholder="Lägg till en ny uppgift..." />
+            <button class="btn-add" onclick="addTodo()">Lägg till</button>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterTodos('all')">Alla</button>
+            <button class="filter-btn" onclick="filterTodos('active')">Aktiva</button>
+            <button class="filter-btn" onclick="filterTodos('completed')">Klara</button>
+            <button class="filter-btn" onclick="filterTodos('high')">🔴 Högsta prioritet</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">Totalt</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="activeCount">0</div>
+                <div class="stat-label">Aktiva</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="completedCount">0</div>
+                <div class="stat-label">Klara</div>
+            </div>
+        </div>
+
+        <div class="todo-list" id="todoList"></div>
+
+        <div class="actions">
+            <button class="btn-action" onclick="clearCompleted()">🗑️ Rensa klara</button>
+            <button class="btn-action" onclick="exportTodos()">📥 Exportera</button>
+            <button class="btn-action" onclick="importTodos()">📤 Importera</button>
+            <button class="btn-action danger" onclick="clearAll()">🔥 Rensa allt</button>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Redigera uppgift</h2>
+            <div class="modal-input-group">
+                <label for="editText">Beskrivning</label>
+                <input type="text" id="editText" />
+            </div>
+            <div class="modal-input-group">
+                <label for="editPriority">Prioritet</label>
+                <select id="editPriority">
+                    <option value="low">Låg</option>
+                    <option value="medium" selected>Medel</option>
+                    <option value="high">Hög</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-save" onclick="saveEdit()">Spara</button>
+                <button class="btn-cancel" onclick="closeModal()">Avbryt</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" style="display: none;" accept=".json" />
+
+    <script>
+        let todos = [];
+        let currentFilter = 'all';
+        let editingId = null;
+
+        // Initiera appen
+        function init() {
+            loadTodos();
+            renderTodos();
+            document.getElementById('todoInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addTodo();
+            });
+        }
+
+        // Lägg till en ny uppgift
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+
+            if (!text) {
+                alert('Skriv en uppgift!');
+                return;
+            }
+
+            const todo = {
+                id: Date.now(),
+                text: text,
+                completed: false,
+                priority: 'medium',
+                createdAt: new Date().toLocaleString('sv-SE')
+            };
+
+            todos.push(todo);
+            saveTodos();
+            renderTodos();
+            input.value = '';
+            input.focus();
+        }
+
+        // Radera uppgift
+        function deleteTodo(id) {
+            if (confirm('Är du säker på att du vill radera denna uppgift?')) {
+                todos = todos.filter(t => t.id !== id);
+                saveTodos();
+                renderTodos();
+            }
+        }
+
+        // Markera som slutförd
+        function toggleComplete(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.completed = !todo.completed;
+                saveTodos();
+                renderTodos();
+            }
+        }
+
+        // Öppna redigeringsmodal
+        function openEdit(id) {
+            editingId = id;
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                document.getElementById('editText').value = todo.text;
+                document.getElementById('editPriority').value = todo.priority;
+                document.getElementById('editModal').style.display = 'block';
+            }
+        }
+
+        // Stäng modal
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+            editingId = null;
+        }
+
+        // Spara redigering
+        function saveEdit() {
+            if (editingId !== null) {
+                const todo = todos.find(t => t.id === editingId);
+                if (todo) {
+                    todo.text = document.getElementById('editText').value.trim();
+                    todo.priority = document.getElementById('editPriority').value;
+                    saveTodos();
+                    renderTodos();
+                    closeModal();
+                }
+            }
+        }
+
+        // Filtrera uppgifter
+        function filterTodos(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderTodos();
+        }
+
+        // Rensa klara uppgifter
+        function clearCompleted() {
+            if (confirm('Är du säker på att du vill radera alla klara uppgifter?')) {
+                todos = todos.filter(t => !t.completed);
+                saveTodos();
+                renderTodos();
+            }
+        }
+
+        // Rensa allt
+        function clearAll() {
+            if (confirm('⚠️ Är du säker på att du vill radera ALLT?')) {
+                todos = [];
+                saveTodos();
+                renderTodos();
+            }
+        }
+
+        // Exportera som JSON
+        function exportTodos() {
+            const dataStr = JSON.stringify(todos, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `todos_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Importera från JSON
+        function importTodos() {
+            document.getElementById('fileInput').click();
+        }
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const importedTodos = JSON.parse(event.target.result);
+                        if (Array.isArray(importedTodos)) {
+                            todos = importedTodos;
+                            saveTodos();
+                            renderTodos();
+                            alert('✅ Uppgifter importerade!');
+                        }
+                    } catch (error) {
+                        alert('❌ Fel vid import av fil!');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Rendrera uppgiftslistan
+        function renderTodos() {
+            const todoList = document.getElementById('todoList');
+            let filtered = todos;
+
+            if (currentFilter === 'active') {
+                filtered = todos.filter(t => !t.completed);
+            } else if (currentFilter === 'completed') {
+                filtered = todos.filter(t => t.completed);
+            } else if (currentFilter === 'high') {
+                filtered = todos.filter(t => t.priority === 'high');
+            }
+
+            if (filtered.length === 0) {
+                todoList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <p>Inga uppgifter här!</p>
+                    </div>
+                `;
+            } else {
+                todoList.innerHTML = filtered.map(todo => `
+                    <div class="todo-item ${todo.completed ? 'completed' : ''}">
+                        <input type="checkbox" class="checkbox" ${todo.completed ? 'checked' : ''} 
+                               onchange="toggleComplete(${todo.id})" />
+                        <div class="todo-text">
+                            ${todo.priority ? `<span class="priority ${todo.priority}">${todo.priority.toUpperCase()}</span>` : ''}
+                            ${todo.text}
+                        </div>
+                        <button class="btn-edit" onclick="openEdit(${todo.id})">✏️</button>
+                        <button class="btn-delete" onclick="deleteTodo(${todo.id})">🗑️</button>
+                    </div>
+                `).join('');
+            }
+
+            updateStats();
+        }
+
+        // Uppdatera statistik
+        function updateStats() {
+            const total = todos.length;
+            const active = todos.filter(t => !t.completed).length;
+            const completed = todos.filter(t => t.completed).length;
+
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('activeCount').textContent = active;
+            document.getElementById('completedCount').textContent = completed;
+        }
+
+        // Spara uppgifter till localStorage
+        function saveTodos() {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        // Ladda uppgifter från localStorage
+        function loadTodos() {
+            const saved = localStorage.getItem('todos');
+            todos = saved ? JSON.parse(saved) : [];
+        }
+
+        // Stäng modal när man klickar utanför
+        window.onclick = (event) => {
+            const modal = document.getElementById('editModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Initiera appen när sidan laddar
+        init();
+    </script>
+</body>
+</html>
