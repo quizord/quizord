@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
@@ -97,7 +97,7 @@
     </div>
     <div class="top-bar">
         <button onclick="resetGame()">🔄 Nollställ</button>
-        <div class="win-message" id="winMessage">🏆 Grattis! Du hittade lösningsordet!</div>
+        <div class="win-message" id="winMessage">🏆 Grattis! Anneli & Tuula, ni hittade lösningsordet!</div>
         <h3 class="clues-heading">📝 Ledtrådar</h3>
     </div>
     <div class="play-grid">
@@ -116,9 +116,9 @@
     </div>
 </div>
 <script>
-    var puzzleText = "MÅNGSIDIGT KREAYIVT URVAL I SAK FÖR VAR OCH EN EFTER TYCKE OCH SMAK";
+    var puzzleText = "MÅNGSIDIGT KREAtIVT URVAL I SAK FÖR VAR OCH EN EFTER TYCKE OCH SMAK";
     var solutionWord = "QKOKBOK";
-    var clueData = [{"id":1,"text":"Den är det som är i sin rätta ordningsföljd","answer":"1SORTERAD"},{"id":2,"text":"Nödvändigt för vissa hälsobaserade produkter","answer":"2RECEPT"},{"id":3,"text":"En sådan finns hos den med flera men hittar gärna ännu mera","answer":"3SAMLING"}];
+    var clueData = [{"id":1,"text":"Den blev det som återfick sin rätta ordningsföljd","answer":"1SORTERAD"},{"id":2,"text":"Nödvändigt för tillgång till vissa hälsopreparat","answer":"2RECEPT"},{"id":3,"text":"Bildas en ju flera det blir","answer":"3SAMLING"}];
     var grid = [[null,null,null,null,"1",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"S",null,null,null,null,null,null,null,null,null,null],[null,null,"Q","K","O","K","B","O","K",null,null,null,null,null,null],[null,null,null,null,"R",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"T",null,null,null,null,null,null,null,null,null,null],["2","R","E","C","E","P","T",null,null,null,null,null,null,null,null],[null,null,null,null,"R",null,null,null,null,null,null,null,null,null,null],[null,null,"3","S","A","M","L","I","N","G",null,null,null,null,null],[null,null,null,null,"D",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
     var gridSize = 15;
     var playerInputs = {};
