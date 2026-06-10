@@ -7,15 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #838383; padding: 15px; max-width: 950px; margin: 0 auto; }
-        .container { background: #c0c0c0; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; padding: 15px; max-width: 950px; margin: 0 auto; }
+        .container { background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; flex-wrap: wrap; background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .logo { flex: 0 0 auto; text-align: left; }
         .logo h1 { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; display: inline; }
         .logo .sub { display: block; font-size: 0.85rem; color: #7f8c8d; letter-spacing: 2px; margin-top: -2px; }
         .spacer { flex: 0 0 auto; min-width: 180px; visibility: hidden; }
         .instruction { flex: 1; text-align: center; font-family: 'Segoe UI', sans-serif; font-size: 1.2rem; color: #666; line-height: 1.4; padding: 0 10px; }
-        .puzzle-banner { background: #000080; color: white; padding: 18px; border-radius: 10px; margin-bottom: 18px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; }
+        .puzzle-banner { background: #2c3e50; color: white; padding: 18px; border-radius: 10px; margin-bottom: 18px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; }
         .puzzle-banner h2 { margin: 0; font-family: 'Segoe UI', sans-serif; font-weight: bold; font-size: 1.6rem; }
         .puzzle-banner small { display: block; margin-top: 4px; font-size: 0.9rem; opacity: 0.85; }
         .top-bar { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -27,7 +27,7 @@
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .win-message::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 70%); animation: shimmer 2s infinite; transform: rotate(25deg); }
         .play-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: flex-start; }
-        .grid-wrapper { flex: 0 0 auto; padding: 8px; border: 3px solid #2c3e50; border-radius: 10px; background: #008000; }
+        .grid-wrapper { flex: 0 0 auto; padding: 8px; border: 3px solid #2c3e50; border-radius: 10px; background: #f1f2f6; }
         table.grid { border-collapse: collapse; margin: 0 auto; }
         td { width: 46px; height: 46px; border: 1.5px solid #333; text-align: center; font-size: 24px; font-weight: normal; vertical-align: middle; background: white; transition: outline 0.15s; position: relative; outline: 2px solid transparent; }
         td.empty { border: none; background: transparent; outline: none; }
@@ -38,7 +38,7 @@
         td.dash-given { background: #e0e0e0; }
         td.dash-given span { color: #333; font-weight: normal; }
         td.given span { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 24px; font-family: 'Patrick Hand', Verdana, sans-serif; }
-        td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fff9b0; }
+        td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fffde7; }
         td.active[data-solution="true"] input:focus { background: #fff9c4; }
         td.active input { width: 100%; height: 100%; border: none; text-align: center; font-size: 24px; font-weight: normal; background: transparent; outline: none; text-transform: uppercase; padding: 0; margin: 0; cursor: pointer; font-family: 'Patrick Hand', Verdana, sans-serif; }
         td.active input:focus { background: #fcf8e3; }
@@ -50,7 +50,7 @@
         .clue-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; padding: 8px 12px; border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: 1.25rem; }
         .clue-item:hover { background: #ecf0f1; transform: translateX(4px); }
         .clue-item.active-clue { border-left-color: #3498db; background: #e8f4fd; }
-        .clue-item.correct-clue { border-left-color: #28a745; background: #abdcb8; }
+        .clue-item.correct-clue { border-left-color: #28a745; background: #d4edda; }
         .clue-number { display: inline-block; width: 26px; height: 26px; line-height: 26px; text-align: center; background: #2c3e50; color: white; border-radius: 4px; font-weight: bold; font-family: 'Segoe UI', sans-serif; }
         .clue-text { font-weight: normal; flex: 1; }
         .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: 80px; padding: 3px 6px; text-align: center; font-weight: normal; font-size: 1rem; color: #2c3e50; white-space: nowrap; font-family: 'Segoe UI', sans-serif; }
@@ -66,13 +66,29 @@
         .val-letter { background: white; padding: 1px 5px; border-radius: 4px; border: 1px solid #ddd; font-size: 12px; }
         .val-equals { font-weight: normal; margin: 0 2px; width: 14px; text-align: center; }
         .val-number { background: #2c3e50; color: white; padding: 1px 6px; border-radius: 6px; font-weight: normal; font-size: 12px; min-width: 24px; text-align: center; }
+        /* TANGENTBORDETS STIL */
+        .keyboard { margin-top: 15px; text-align: center; }
+        .keyboard-row { display: flex; justify-content: center; gap: 4px; margin-bottom: 4px; }
+        .key-btn {
+            width: 42px; height: 42px; font-size: 1.2rem; font-weight: bold; border: 2px solid #2c3e50; border-radius: 6px;
+            background: #fff; color: #2c3e50; cursor: pointer; transition: 0.1s; touch-action: manipulation;
+            font-family: 'Patrick Hand', Verdana, sans-serif;
+        }
+        .key-btn:hover { background: #d5dbdb; }
+        .key-btn:active { background: #b0bec5; }
+        .key-btn.backspace { width: 56px; background: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+        .key-btn.next-word { width: 56px; background: #d4edda; color: #155724; border-color: #c3e6cb; }
+        @media (max-width: 600px) {
+            .key-btn { width: 32px; height: 38px; font-size: 1rem; }
+            .key-btn.backspace, .key-btn.next-word { width: 44px; }
+        }
         @media print {
             body { background: white; padding: 0.5cm; max-width: 100%; }
             .container { box-shadow: none; padding: 0; }
-            .top-bar button, .win-message { display: none; }
+            .top-bar button, .win-message, .keyboard { display: none; }
             .header { display: flex !important; box-shadow: none; padding: 10px 0; background: white; }
             .puzzle-banner { background: #2c3e50; color: white; padding: 15px; margin-bottom: 10px; }
-            .grid-wrapper { border: 2px solid #2c3e50; background: #008000; }
+            .grid-wrapper { border: 2px solid #2c3e50; background: #f1f2f6; }
             td { width: 36px; height: 36px; font-size: 20px; border-color: #000; }
             td.active input { font-size: 20px; }
             .play-clues { font-size: 0.9rem; }
@@ -92,7 +108,7 @@
         <div class="spacer"></div>
     </div>
     <div class="puzzle-banner" id="puzzleBanner">
-        <h2>"MÅNGSIDIGT KREATIVT URVAL I SAK FÖR VAR OCH EN EFTER TYCKE OCH SMAK"</h2>
+        <h2>"HAR MAN I STÄLLET FÖR HÅR"</h2>
         <small>Hovra eller klicka här för lösningsordets rad</small>
     </div>
     <div class="top-bar">
@@ -101,9 +117,9 @@
         <h3 class="clues-heading">📝 Ledtrådar</h3>
     </div>
     <div class="play-grid">
-        <div class="grid-wrapper"><table class="grid" id="crosswordGrid"><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active given" data-cell-id="0-4" data-solution="false"><span>1</span></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="1-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active given solution-given" data-cell-id="2-2" data-solution="true"><span>Q</span></td><td class="active" data-cell-id="2-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-3" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="2-4" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="2-5" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="2-6" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-6" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="2-7" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-7" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="2-8" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-8" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="3-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="3-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="4-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="4-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="active given" data-cell-id="5-0" data-solution="false"><span>2</span></td><td class="active" data-cell-id="5-1" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-1" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-2" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-2" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-3" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-3" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-6" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-6" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="6-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="6-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active given" data-cell-id="7-2" data-solution="false"><span>3</span></td><td class="active" data-cell-id="7-3" data-solution="false"><input type="text" maxlength="1" data-cell-id="7-3" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="7-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="7-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="7-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="7-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="7-6" data-solution="false"><input type="text" maxlength="1" data-cell-id="7-6" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="7-7" data-solution="false"><input type="text" maxlength="1" data-cell-id="7-7" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="7-8" data-solution="false"><input type="text" maxlength="1" data-cell-id="7-8" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="7-9" data-solution="false"><input type="text" maxlength="1" data-cell-id="7-9" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="8-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="8-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></table></div>
+        <div class="grid-wrapper"><table class="grid" id="crosswordGrid"><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active given" data-cell-id="0-5" data-solution="false"><span>3</span></td></tr><tr><td class="empty"></td><td class="active given" data-cell-id="1-1" data-solution="false"><span>1</span></td><td class="empty"></td><td class="active given" data-cell-id="1-3" data-solution="false"><span>2</span></td><td class="empty"></td><td class="active" data-cell-id="1-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="empty"></td><td class="active" data-cell-id="2-1" data-solution="false"><input type="text" maxlength="1" data-cell-id="2-1" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="active" data-cell-id="2-3" data-solution="false"><input type="text" maxlength="1" data-cell-id="2-3" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="active" data-cell-id="2-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="2-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="active given solution-given" data-cell-id="3-0" data-solution="true"><span>Q</span></td><td class="active" data-cell-id="3-1" data-solution="true"><input type="text" maxlength="1" data-cell-id="3-1" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-2" data-solution="true"><input type="text" maxlength="1" data-cell-id="3-2" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="3-3" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-4" data-solution="true"><input type="text" maxlength="1" data-cell-id="3-4" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-5" data-solution="true"><input type="text" maxlength="1" data-cell-id="3-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="empty"></td><td class="active" data-cell-id="4-1" data-solution="false"><input type="text" maxlength="1" data-cell-id="4-1" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="active" data-cell-id="4-3" data-solution="false"><input type="text" maxlength="1" data-cell-id="4-3" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="active" data-cell-id="4-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="4-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="empty"></td><td class="active" data-cell-id="5-1" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-1" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="active" data-cell-id="5-3" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-3" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="active" data-cell-id="5-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="empty"></td><td class="active" data-cell-id="6-1" data-solution="false"><input type="text" maxlength="1" data-cell-id="6-1" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="6-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="6-5" value="" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr></table></div>
         <div class="play-clues">
-            <div id="clueList"><div class="clue-item" data-word="1SORTERAD"><span class="clue-number">1</span><span class="clue-text">Inordnad i rätt ordning</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1SORTERAD">0 / 20</span><span class="clue-sum-total">20</span></span></div><div class="clue-item" data-word="2RECEPT"><span class="clue-number">2</span><span class="clue-text">Förskrivning inför uttag</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2RECEPT">0 / 13</span><span class="clue-sum-total">13</span></span></div><div class="clue-item" data-word="3SAMLING"><span class="clue-number">3</span><span class="clue-text">Kallas till gemensam plats</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3SAMLING">0 / 17</span><span class="clue-sum-total">17</span></span></div></div>
+            <div id="clueList"><div class="clue-item" data-word="2DJUR"><span class="clue-number">1</span><span class="clue-text">Finns många i naturens fauna</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2DJUR">0 / 10</span><span class="clue-sum-total">10</span></span></div><div class="clue-item" data-word="3KONUNG"><span class="clue-number">2</span><span class="clue-text">Manligt statsöverhuvud</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3KONUNG">0 / 17</span><span class="clue-sum-total">17</span></span></div><div class="clue-item" data-word="1FLOCK"><span class="clue-number">3</span><span class="clue-text">Går får gärna i  i</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1FLOCK">0 / 9</span><span class="clue-sum-total">9</span></span></div></div>
             <h3 style="font-family:'Segoe UI',sans-serif;">🔢 Bokstavsvärden</h3>
             <div class="values-box">
                 <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
@@ -114,18 +130,29 @@
             </div>
         </div>
     </div>
+    <div id="virtual-keyboard" class="keyboard"><div class="keyboard-row"><button class="key-btn" data-key="Q">Q</button><button class="key-btn" data-key="W">W</button><button class="key-btn" data-key="E">E</button><button class="key-btn" data-key="R">R</button><button class="key-btn" data-key="T">T</button><button class="key-btn" data-key="Y">Y</button><button class="key-btn" data-key="U">U</button><button class="key-btn" data-key="I">I</button><button class="key-btn" data-key="O">O</button><button class="key-btn" data-key="P">P</button><button class="key-btn" data-key="Å">Å</button></div><div class="keyboard-row"><button class="key-btn" data-key="A">A</button><button class="key-btn" data-key="S">S</button><button class="key-btn" data-key="D">D</button><button class="key-btn" data-key="F">F</button><button class="key-btn" data-key="G">G</button><button class="key-btn" data-key="H">H</button><button class="key-btn" data-key="J">J</button><button class="key-btn" data-key="K">K</button><button class="key-btn" data-key="L">L</button><button class="key-btn" data-key="Ö">Ö</button><button class="key-btn" data-key="Ä">Ä</button></div><div class="keyboard-row"><button class="key-btn backspace" data-key="BACKSPACE">←</button><button class="key-btn" data-key="Z">Z</button><button class="key-btn" data-key="X">X</button><button class="key-btn" data-key="C">C</button><button class="key-btn" data-key="V">V</button><button class="key-btn" data-key="B">B</button><button class="key-btn" data-key="N">N</button><button class="key-btn" data-key="M">M</button><button class="key-btn" data-key="-">-</button><button class="key-btn next-word" data-key="NEXT">→</button></div></div>
 </div>
 <script>
-    var puzzleText = "MÅNGSIDIGT KREATIVT URVAL I SAK FÖR VAR OCH EN EFTER TYCKE OCH SMAK";
-    var solutionWord = "QKOKBOK";
-    var clueData = [{"id":1,"text":"Inordnad i rätt ordning","answer":"1SORTERAD"},{"id":2,"text":"Förskrivning inför uttag","answer":"2RECEPT"},{"id":3,"text":"Kallas till gemensam plats","answer":"3SAMLING"}];
-    var grid = [[null,null,null,null,"1",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"S",null,null,null,null,null,null,null,null,null,null],[null,null,"Q","K","O","K","B","O","K",null,null,null,null,null,null],[null,null,null,null,"R",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"T",null,null,null,null,null,null,null,null,null,null],["2","R","E","C","E","P","T",null,null,null,null,null,null,null,null],[null,null,null,null,"R",null,null,null,null,null,null,null,null,null,null],[null,null,"3","S","A","M","L","I","N","G",null,null,null,null,null],[null,null,null,null,"D",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
+    var puzzleText = "HAR MAN I STÄLLET FÖR HÅR";
+    var obfuscatedSolution = "VQJOTS";
+    // Avkoda lösningsordet
+    var solutionWord = (function() {
+        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ0123456789-";
+        var key = 5;
+        return obfuscatedSolution.split('').map(function(ch) {
+            var idx = alphabet.indexOf(ch);
+            if (idx === -1) return ch;
+            return alphabet[(idx - key + alphabet.length) % alphabet.length];
+        }).join('');
+    })();
+    var clueData = [{"id":1,"text":"Finns många i naturens fauna","answer":"2DJUR"},{"id":2,"text":"Manligt statsöverhuvud","answer":"3KONUNG"},{"id":3,"text":"Går får gärna i  i","answer":"1FLOCK"}];
+    var grid = [[null,null,null,null,null,"3",null,null,null,null,null,null,null,null,null],[null,"1",null,"2",null,"K",null,null,null,null,null,null,null,null,null],[null,"F",null,"D",null,"O",null,null,null,null,null,null,null,null,null],["Q","L","E","J","O","N",null,null,null,null,null,null,null,null,null],[null,"O",null,"U",null,"U",null,null,null,null,null,null,null,null,null],[null,"C",null,"R",null,"N",null,null,null,null,null,null,null,null,null],[null,"K",null,null,null,"G",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
     var gridSize = 15;
     var playerInputs = {};
     var activeWord = null;
     var winShown = false;
 
-    var givenCells = {"0-4":"1","5-0":"2","7-2":"3","2-2":"Q"};
+    var givenCells = {"1-3":"2","0-5":"3","1-1":"1","3-0":"Q"};
     for (var cellId in givenCells) {
         playerInputs[cellId] = givenCells[cellId];
     }
@@ -384,6 +411,7 @@
 
         updateAllFilledStatus();
         renderGame();
+        setupVirtualKeyboard();
     })();
 
     function setActiveWord(word) {
@@ -510,6 +538,80 @@
             items[i].classList.remove('correct-clue', 'active-clue');
         }
     };
+
+    // ---------- VIRTUELLT TANGENTBORD ----------
+    function setupVirtualKeyboard() {
+        var buttons = document.querySelectorAll('.key-btn');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function(e) {
+                var key = this.dataset.key;
+                if (key === 'BACKSPACE') {
+                    handleVirtualBackspace();
+                } else if (key === 'NEXT') {
+                    handleVirtualNext();
+                } else {
+                    handleVirtualLetter(key);
+                }
+            });
+        }
+    }
+
+    function getActiveInput() {
+        var focused = document.activeElement;
+        if (focused && focused.tagName === 'INPUT' && focused.dataset.cellId) {
+            return focused;
+        }
+        if (activeWord && allWordInputs[activeWord] && allWordInputs[activeWord].length > 0) {
+            return allWordInputs[activeWord][0];
+        }
+        var firstWord = wordOrder[0];
+        if (firstWord && allWordInputs[firstWord] && allWordInputs[firstWord].length > 0) {
+            return allWordInputs[firstWord][0];
+        }
+        return null;
+    }
+
+    function handleVirtualLetter(letter) {
+        var input = getActiveInput();
+        if (!input) return;
+        input.focus();
+        input.value = letter;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    function handleVirtualBackspace() {
+        var input = getActiveInput();
+        if (!input) return;
+        input.focus();
+        var cellId = input.dataset.cellId;
+        if (input.value !== '') {
+            input.value = '';
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+        } else {
+            // Rutan är redan tom – gå till föregående ruta och töm den
+            if (activeWord && allWordInputs[activeWord]) {
+                var arr = allWordInputs[activeWord];
+                var idx = arr.indexOf(input);
+                if (idx > 0) {
+                    var prevInput = arr[idx - 1];
+                    prevInput.focus();
+                    prevInput.value = '';
+                    prevInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+        }
+    }
+
+    function handleVirtualNext() {
+        if (activeWord && wordOrder.indexOf(activeWord) !== -1) {
+            var nextIdx = (wordOrder.indexOf(activeWord) + 1) % wordOrder.length;
+            var nextWord = wordOrder[nextIdx];
+            if (allWordInputs[nextWord] && allWordInputs[nextWord].length > 0) {
+                setActiveWord(nextWord);
+                allWordInputs[nextWord][0].focus();
+            }
+        }
+    }
 </script>
 </body>
 </html>
