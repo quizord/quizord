@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #606060; padding: 15px; max-width: 950px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', sans-serif; background: #727272; padding: 15px; max-width: 950px; margin: 0 auto; }
         .container { background: #c0c0c0; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; flex-wrap: wrap; background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .logo { flex: 0 0 auto; text-align: left; }
@@ -15,7 +15,7 @@
         .logo .sub { display: block; font-size: 0.85rem; color: #7f8c8d; letter-spacing: 2px; margin-top: -2px; }
         .spacer { flex: 0 0 auto; min-width: 180px; visibility: hidden; }
         .instruction { flex: 1; text-align: center; font-family: 'Segoe UI', sans-serif; font-size: 1.2rem; color: #666; line-height: 1.4; padding: 0 10px; }
-        .puzzle-banner { background: #000080; color: white; padding: 18px; border-radius: 10px; margin-bottom: 18px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; }
+        .puzzle-banner { background: #0000a0; color: white; padding: 18px; border-radius: 10px; margin-bottom: 18px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; }
         .puzzle-banner h2 { margin: 0; font-family: 'Segoe UI', sans-serif; font-weight: bold; font-size: 1.6rem; }
         .puzzle-banner small { display: block; margin-top: 4px; font-size: 0.9rem; opacity: 0.85; }
         .top-bar { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -38,7 +38,7 @@
         td.dash-given { background: #e0e0e0; }
         td.dash-given span { color: #333; font-weight: normal; }
         td.given span { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 24px; font-family: 'Patrick Hand', Verdana, sans-serif; }
-        td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fff57d; }
+        td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fff579; }
         td.active[data-solution="true"] input:focus { background: #fff9c4; }
         td.active input { width: 100%; height: 100%; border: none; text-align: center; font-size: 24px; font-weight: normal; background: transparent; outline: none; text-transform: uppercase; padding: 0; margin: 0; cursor: pointer; font-family: 'Patrick Hand', Verdana, sans-serif; }
         td.active input:focus { background: #fcf8e3; }
@@ -47,10 +47,10 @@
         td.solution-correct { background: #fff3cd; border-color: #ffc107; color: #856404; animation: pulse 1.5s infinite; }
         td.solution-given.solution-correct { animation: none; background: #2c3e50; border-color: #333; color: white; }
         .play-clues { flex: 1; min-width: 180px; margin-top: 0; }
-        .clue-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; padding: 8px 12px; border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: 1.25rem; }
+        .clue-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; padding: 8px 12px; border-left: 4px solid #bdc3c7; background: #000000; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: 1.25rem; }
         .clue-item:hover { background: #ecf0f1; transform: translateX(4px); }
         .clue-item.active-clue { border-left-color: #3498db; background: #e8f4fd; }
-        .clue-item.correct-clue { border-left-color: #28a745; background: #80ca93; }
+        .clue-item.correct-clue { border-left-color: #28a745; background: #d4edda; }
         .clue-number { display: inline-block; width: 26px; height: 26px; line-height: 26px; text-align: center; background: #2c3e50; color: white; border-radius: 4px; font-weight: bold; font-family: 'Segoe UI', sans-serif; }
         .clue-text { font-weight: normal; flex: 1; }
         .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: 80px; padding: 3px 6px; text-align: center; font-weight: normal; font-size: 1rem; color: #2c3e50; white-space: nowrap; font-family: 'Segoe UI', sans-serif; }
@@ -116,9 +116,9 @@
         <h3 class="clues-heading">📝 Ledtrådar</h3>
     </div>
     <div class="play-grid">
-        <div class="grid-wrapper"><table class="grid" id="crosswordGrid"><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active given solution-given" data-cell-id="0-3" data-solution="true"><span>Q</span></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="active given" data-cell-id="1-1" data-solution="false"><span>3</span></td><td class="active" data-cell-id="1-2" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-2" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="1-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-4" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-5" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-6" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-6" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="2-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="active given" data-cell-id="3-1" data-solution="false"><span>1</span></td><td class="active" data-cell-id="3-2" data-solution="false"><input type="text" maxlength="1" data-cell-id="3-2" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="3-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="3-4" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="3-5" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="4-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="4-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="active given" data-cell-id="5-0" data-solution="false"><span>2</span></td><td class="active" data-cell-id="5-1" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-1" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-2" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-2" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="5-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-4" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-5" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-6" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-6" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr></table></div>
+        <div class="grid-wrapper"><table class="grid" id="crosswordGrid"><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active given solution-given" data-cell-id="0-3" data-solution="true"><span>Q</span></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="active given" data-cell-id="1-1" data-solution="false"><span>1</span></td><td class="active" data-cell-id="1-2" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-2" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="1-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-4" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-5" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="1-6" data-solution="false"><input type="text" maxlength="1" data-cell-id="1-6" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="2-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="2-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="active given" data-cell-id="3-1" data-solution="false"><span>2</span></td><td class="active" data-cell-id="3-2" data-solution="false"><input type="text" maxlength="1" data-cell-id="3-2" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="3-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="3-4" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="3-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="3-5" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="4-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="4-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="active given" data-cell-id="5-0" data-solution="false"><span>3</span></td><td class="active" data-cell-id="5-1" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-1" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-2" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-2" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-3" data-solution="true"><input type="text" maxlength="1" data-cell-id="5-3" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-4" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-4" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-5" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-5" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td><td class="active" data-cell-id="5-6" data-solution="false"><input type="text" maxlength="1" data-cell-id="5-6" value="" inputmode="none" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')"></td></tr></table></div>
         <div class="play-clues">
-            <div id="clueList"><div class="clue-item" data-word="1DJUR"><span class="clue-number">1</span><span class="clue-text">Finns många i naturens fauna</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1DJUR">0 / 10</span><span class="clue-sum-total">10</span></span></div><div class="clue-item" data-word="2KONUNG"><span class="clue-number">2</span><span class="clue-text">Manligt statsöverhuvud</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2KONUNG">0 / 17</span><span class="clue-sum-total">17</span></span></div><div class="clue-item" data-word="3FLOCK"><span class="clue-number">3</span><span class="clue-text">Går får gärna i</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3FLOCK">0 / 9</span><span class="clue-sum-total">9</span></span></div></div>
+            <div id="clueList"><div class="clue-item" data-word="2DJUR"><span class="clue-number">1</span><span class="clue-text">Finns många i naturens fauna</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2DJUR">0 / 10</span><span class="clue-sum-total">10</span></span></div><div class="clue-item" data-word="3KONUNG"><span class="clue-number">2</span><span class="clue-text">Manligt statsöverhuvud</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3KONUNG">0 / 17</span><span class="clue-sum-total">17</span></span></div><div class="clue-item" data-word="1FLOCK"><span class="clue-number">3</span><span class="clue-text">Går får gärna i</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1FLOCK">0 / 9</span><span class="clue-sum-total">9</span></span></div></div>
             <h3 style="font-family:'Segoe UI',sans-serif;">🔢 Bokstavsvärden</h3>
             <div class="values-box">
                 <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
@@ -143,14 +143,15 @@
             return alphabet[(idx - key + alphabet.length) % alphabet.length];
         }).join('');
     })();
-    var clueData = [{"id":1,"text":"Finns många i naturens fauna","answer":"1DJUR"},{"id":2,"text":"Manligt statsöverhuvud","answer":"2KONUNG"},{"id":3,"text":"Går får gärna i","answer":"3FLOCK"}];
-    var grid = [[null,null,null,"Q",null,null,null,null,null,null,null,null,null,null,null],[null,"3","F","L","O","C","K",null,null,null,null,null,null,null,null],[null,null,null,"E",null,null,null,null,null,null,null,null,null,null,null],[null,"1","D","J","U","R",null,null,null,null,null,null,null,null,null],[null,null,null,"O",null,null,null,null,null,null,null,null,null,null,null],["2","K","O","N","U","N","G",null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
+    var clueData = [{"id":1,"text":"Finns många i naturens fauna","answer":"2DJUR"},{"id":2,"text":"Manligt statsöverhuvud","answer":"3KONUNG"},{"id":3,"text":"Går får gärna i","answer":"1FLOCK"}];
+    var grid = [[null,null,null,"Q",null,null,null,null,null,null,null,null,null,null,null],[null,"1","F","L","O","C","K",null,null,null,null,null,null,null,null],[null,null,null,"E",null,null,null,null,null,null,null,null,null,null,null],[null,"2","D","J","U","R",null,null,null,null,null,null,null,null,null],[null,null,null,"O",null,null,null,null,null,null,null,null,null,null,null],["3","K","O","N","U","N","G",null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
     var gridSize = 15;
     var playerInputs = {};
     var activeWord = null;
     var winShown = false;
+    var lastFocusedInput = null;   // NY: minns senast fokuserade rutan
 
-    var givenCells = {"3-1":"1","5-0":"2","1-1":"3","0-3":"Q"};
+    var givenCells = {"3-1":"2","5-0":"3","1-1":"1","0-3":"Q"};
     for (var cellId in givenCells) {
         playerInputs[cellId] = givenCells[cellId];
     }
@@ -310,6 +311,7 @@
         for (var i = 0; i < inputs.length; i++) {
             (function(input) {
                 input.addEventListener('focus', function() {
+                    lastFocusedInput = this;   // NY: spara referens
                     this.select();
                     var cellId = this.dataset.cellId;
                     var words = cellWords[cellId] || [];
@@ -395,6 +397,7 @@
                     }
                 });
                 input.addEventListener('click', function() {
+                    lastFocusedInput = this;   // NY: uppdatera vid klick
                     this.select();
                     var cellId = this.dataset.cellId;
                     var words = cellWords[cellId] || [];
@@ -525,6 +528,7 @@
         }
         activeWord = null;
         winShown = false;
+        lastFocusedInput = null;
         document.getElementById('winMessage').style.display = 'none';
         renderGame();
         var tds = document.querySelectorAll('#crosswordGrid td.active');
@@ -537,6 +541,7 @@
         }
     };
 
+    // ---------- VIRTUELLT TANGENTBORD (fixat) ----------
     function setupVirtualKeyboard() {
         var buttons = document.querySelectorAll('.key-btn');
         for (var i = 0; i < buttons.length; i++) {
@@ -554,6 +559,10 @@
     }
 
     function getActiveInput() {
+        // Först testa senast fokuserade input
+        if (lastFocusedInput && lastFocusedInput.dataset && lastFocusedInput.dataset.cellId) {
+            return lastFocusedInput;
+        }
         var focused = document.activeElement;
         if (focused && focused.tagName === 'INPUT' && focused.dataset.cellId) {
             return focused;
@@ -571,7 +580,19 @@
     function handleVirtualLetter(letter) {
         var input = getActiveInput();
         if (!input) return;
+
+        // Se till att rätt ord är aktivt för den här rutan
+        var cellId = input.dataset.cellId;
+        var words = cellWords[cellId] || [];
+        if (words.length > 0) {
+            var preferred = words.find(function(w) { return w !== solutionWord; }) || solutionWord;
+            if (activeWord !== preferred) {
+                setActiveWord(preferred);
+            }
+        }
+
         input.focus();
+        lastFocusedInput = input;
         input.value = letter;
         input.dispatchEvent(new Event('input', { bubbles: true }));
     }
@@ -580,6 +601,7 @@
         var input = getActiveInput();
         if (!input) return;
         input.focus();
+        lastFocusedInput = input;
         if (input.value !== '') {
             input.value = '';
             input.dispatchEvent(new Event('input', { bubbles: true }));
@@ -590,6 +612,7 @@
                 if (idx > 0) {
                     var prevInput = arr[idx - 1];
                     prevInput.focus();
+                    lastFocusedInput = prevInput;
                     prevInput.value = '';
                     prevInput.dispatchEvent(new Event('input', { bubbles: true }));
                 }
@@ -604,6 +627,7 @@
             if (allWordInputs[nextWord] && allWordInputs[nextWord].length > 0) {
                 setActiveWord(nextWord);
                 allWordInputs[nextWord][0].focus();
+                lastFocusedInput = allWordInputs[nextWord][0];
             }
         }
     }
