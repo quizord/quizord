@@ -239,7 +239,679 @@
                 </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></table></div>
         <div class="play-clues">
             <div id="clueList"><div class="clue-item" data-word="1PLANET">
+            <span class="clue-number">1</span><!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Ord</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #7c7c7c; 
+            padding: clamp(10px, 2vw, 25px); 
+            width: 95%; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            font-size: clamp(1rem, 2vw, 1.2rem); 
+        }
+        .container { background: #c0c0c0; padding: clamp(15px, 2vw, 30px); border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .puzzle-banner { 
+            background: #000080; color: #ffffff; 
+            padding: clamp(12px, 2vw, 20px) clamp(15px, 2vw, 25px); 
+            border-radius: 10px; margin-bottom: clamp(12px, 2vw, 20px); 
+            display: flex; align-items: center; justify-content: space-between; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+            cursor: pointer; flex-wrap: wrap;
+        }
+        .banner-left { display: flex; align-items: baseline; gap: clamp(4px, 1vw, 10px); }
+        .logo { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: 2px; }
+        .logo-sub { font-size: clamp(0.6rem, 1.2vw, 0.9rem); opacity: 0.8; }
+        .banner-center { flex: 1; text-align: center; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: bold; padding: 0 clamp(10px, 2vw, 25px); }
+        .banner-right { font-size: clamp(1.2rem, 2.5vw, 2rem); cursor: pointer; background: rgba(255,255,255,0.2); border-radius: 50%; width: clamp(32px, 5vw, 44px); height: clamp(32px, 5vw, 44px); display: flex; align-items: center; justify-content: center; }
+        .banner-right:hover { background: rgba(255,255,255,0.4); }
+        .top-bar { display: flex; align-items: center; gap: 15px; margin-bottom: clamp(12px, 2vw, 18px); flex-wrap: wrap; }
+        .top-bar button { background: #ecf0f1; border: none; border-radius: 6px; padding: clamp(6px, 1vw, 10px) clamp(12px, 2vw, 18px); cursor: pointer; font-weight: 600; color: #2c3e50; transition: 0.2s; font-size: clamp(0.9rem, 1.5vw, 1.05rem); }
+        .top-bar button:hover { background: #d5dbdb; }
+        .clues-heading { margin: 0; font-family: 'Segoe UI', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+        .win-message { background: #f1c40f; color: #1a1a1a; font-weight: 800; font-size: clamp(1rem, 2vw, 1.4rem); padding: clamp(8px, 1.5vw, 12px) clamp(14px, 2vw, 22px); border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); animation: pulse 1.5s infinite, shimmer 2s infinite; position: relative; overflow: hidden; display: none; text-shadow: 0 1px 3px rgba(255,255,255,0.7); }
+        @keyframes pulse { 0% { box-shadow: 0 0 4px #f1c40f; } 50% { box-shadow: 0 0 10px #f1c40f; } 100% { box-shadow: 0 0 4px #f1c40f; } }
+        @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+        .win-message::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 70%); animation: shimmer 2s infinite; transform: rotate(25deg); }
+        .play-grid { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 20px); justify-content: center; align-items: flex-start; }
+        .grid-wrapper { flex: 0 0 auto; padding: clamp(5px, 1vw, 10px); border: 3px solid #333333; border-radius: 10px; background: #408080; }
+        table.grid { border-collapse: collapse; margin: 0 auto; table-layout: fixed; }
+        td { 
+            width: clamp(40px, 5vw, 65px); 
+            height: clamp(40px, 5vw, 65px); 
+            border: 1.5px solid #333333; 
+            text-align: center; 
+            font-size: clamp(20px, 3.5vw, 32px); 
+            font-weight: normal; 
+            vertical-align: middle; background: white; 
+            transition: outline 0.15s; position: relative; 
+            outline: 2px solid transparent; 
+            box-sizing: border-box; 
+        }
+        td.empty { border: none; background: transparent; outline: none; }
+        td.active { background: #ffffff; }
+        td.given { background: #bbdefb; }
+        td.solution-given { background: #000080; }
+        td.solution-given .given-letter { color: white; }
+        td.dash-given { background: #e0e0e0; }
+        td.dash-given span { color: #333; font-weight: normal; }
+        td.given .given-letter { 
+            display: flex; align-items: center; justify-content: center; 
+            width: 100%; height: 100%; 
+            font-size: clamp(20px, 3.5vw, 32px); 
+            font-family: 'Patrick Hand', Verdana, sans-serif; 
+        }
+        td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fff788; }
+        td.active[data-solution="true"] input:focus { background: #fff9c4; }
+        td.active input { width: 100%; height: 100%; border: none; text-align: center; font-size: clamp(20px, 3.5vw, 32px); font-weight: normal; background: transparent; outline: none; text-transform: uppercase; padding: 0; margin: 0; cursor: pointer; font-family: 'Patrick Hand', Verdana, sans-serif; }
+        td.active input:focus { background: #fcf8e3; }
+        td.word-active { outline-color: #5dade2; }
+        td.given.word-active { outline-color: transparent; }
+        td.solution-correct { background: #fff3cd; border-color: #ffc107; color: #856404; animation: pulse 1.5s infinite; }
+        td.solution-given.solution-correct { animation: none; background: #000080; border-color: #333; color: white; }
+        .play-clues { flex: 1; min-width: min(220px, 100%); margin-top: 0; }
+        .clue-item { display: flex; align-items: center; gap: clamp(8px, 1.5vw, 12px); margin-bottom: clamp(6px, 1vw, 10px); padding: clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px); border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: clamp(1rem, 2vw, 1.4rem); }
+        .clue-item:hover { background: #ecf0f1; transform: translateX(4px); }
+        .clue-item.active-clue { border-left-color: #3498db; background: #e8f4fd; }
+        .clue-item.correct-clue { border-left-color: #28a745; background: #a6d9b3; }
+        .clue-number { 
+            display: inline-flex; align-items: center; justify-content: center; 
+            width: clamp(28px, 4vw, 36px); height: clamp(28px, 4vw, 36px); 
+            line-height: clamp(28px, 4vw, 36px); text-align: center; 
+            background: #bbdefb; 
+            color: #400040; 
+            border-radius: 6px; font-size: clamp(1rem, 2vw, 1.4rem); 
+        }
+        .clue-text { font-weight: normal; flex: 1; color: #2c3e50; }
+        .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: clamp(70px, 10vw, 90px); padding: clamp(3px, 0.5vw, 5px) clamp(5px, 1vw, 8px); text-align: center; font-weight: normal; font-size: clamp(0.9rem, 1.5vw, 1.15rem); color: #2c3e50; white-space: nowrap; font-family: 'Segoe UI', sans-serif; }
+        .clue-sum-live { }
+        .clue-sum-total { display: none; }
+        @media print {
+            .clue-sum-live { display: none; }
+            .clue-sum-total { display: inline; }
+        }
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background: #ffffff; color: #2c3e50; margin: 10% auto; padding: 25px; border-radius: 12px; width: 80%; max-width: 600px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); position: relative; font-size: 1.1rem; }
+        .modal-content h3 { margin-top: 0; }
+        .close { position: absolute; top: 10px; right: 20px; font-size: 2rem; font-weight: bold; cursor: pointer; color: #aaa; }
+        .close:hover { color: #000; }
+        .values-box { display: flex; flex-direction: column; gap: 2px; margin: 15px 0; padding: 10px; background: #f1f2f6; border-radius: 6px; }
+        .val-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .val-letters { display: flex; gap: 3px; min-width: 170px; }
+        .val-letter { background: white; padding: 2px 6px; border-radius: 4px; border: 1px solid #ddd; font-size: 13px; }
+        .val-equals { font-weight: normal; margin: 0 2px; width: 14px; text-align: center; }
+        .val-number { background: #2c3e50; color: white; padding: 2px 8px; border-radius: 6px; font-weight: normal; font-size: 13px; min-width: 26px; text-align: center; }
+
+        .print-only-section { display: none; }
+        @media print {
+            .print-only-section { display: block; margin-top: 15px; }
+            body { background: white; padding: 0.5cm; max-width: 100%; width: 100%; font-size: 12pt; }
+            .container { box-shadow: none; padding: 0; }
+            .top-bar button, .win-message { display: none; }
+            .puzzle-banner { 
+                background: #000080; 
+                color: #ffffff; 
+                padding: 15px; margin-bottom: 10px; 
+            }
+            .grid-wrapper { border: 2px solid #2c3e50; background: #408080; }
+            td { width: 40px; height: 40px; font-size: 22px; border-color: #000; }
+            td.active input { font-size: 22px; }
+            .play-clues { font-size: 1rem; }
+            .clue-item { padding: 6px 10px; margin-bottom: 6px; }
+            .values-box { padding: 6px; }
+            .banner-right { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="puzzle-banner" id="puzzleBanner">
+        <div class="banner-left">
+            <span class="logo">QwizOrd</span>
+            <span class="logo-sub">— språk & fantasi —</span>
+        </div>
+        <div class="banner-center">"Mitt i ring är ingenting förutom där omkring"</div>
+        <div class="banner-right" id="helpBtn" title="Instruktioner">?</div>
+    </div>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h3>🧩 Så här löser du</h3>
+            <p></p>
+            <h3>🔢 Bokstavsvärden</h3>
+            <div class="values-box">
+                <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">G</span><span class="val-letter">H</span><span class="val-letter">I</span><span class="val-letter">J</span><span class="val-letter">K</span><span class="val-letter">L</span></div><span class="val-equals">=</span><span class="val-number">2</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">M</span><span class="val-letter">N</span><span class="val-letter">O</span><span class="val-letter">P</span><span class="val-letter">Q</span><span class="val-letter">R</span></div><span class="val-equals">=</span><span class="val-number">3</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">S</span><span class="val-letter">T</span><span class="val-letter">U</span><span class="val-letter">V</span><span class="val-letter">W</span><span class="val-letter">X</span></div><span class="val-equals">=</span><span class="val-number">4</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">Y</span><span class="val-letter">Z</span><span class="val-letter">Å</span><span class="val-letter">Ä</span><span class="val-letter">Ö</span></div><span class="val-equals">=</span><span class="val-number">5</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-bar">
+        <button onclick="resetGame()">🔄 Nollställ</button>
+        <div class="win-message" id="winMessage">🏆 Grattis! Du har löst gåtan!</div>
+        <h3 class="clues-heading">📝 Ledtrådar</h3>
+    </div>
+    <div class="play-grid">
+        <div class="grid-wrapper"><table class="grid" id="crosswordGrid"><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active given" data-cell-id="0-5" data-solution="false">
+                    <span class="given-letter">2</span>
+                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active given" data-cell-id="1-2" data-solution="false">
+                    <span class="given-letter">1</span>
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="1-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="1-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="2-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="2-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="2-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="2-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="active given" data-cell-id="2-7" data-solution="false">
+                    <span class="given-letter">3</span>
+                </td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="3-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="3-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="3-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="3-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="active" data-cell-id="3-7" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="3-7" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td></tr><tr><td class="active given solution-given" data-cell-id="4-0" data-solution="true">
+                    <span class="given-letter">Q</span>
+                </td><td class="active" data-cell-id="4-1" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-1" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-2" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-3" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-3" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-4" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-4" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-5" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-6" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-6" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-7" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-7" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-8" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-8" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="5-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="5-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="5-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="5-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="active" data-cell-id="5-7" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="5-7" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="6-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="6-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="6-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="6-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="active" data-cell-id="6-7" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="6-7" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="7-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="7-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="7-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="7-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></table></div>
+        <div class="play-clues">
+            <div id="clueList"><div class="clue-item" data-word="1PLANET">
             <span class="clue-number">1</span>
+            <span class="clue-text">Får taxa på banan</span>
+            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1PLANET">0 / 14</span><span class="clue-sum-total">14</span></span>
+        </div><div class="clue-item" data-word="2UPPRYMD">
+            <span class="clue-number">2</span>
+            <span class="clue-text">Lättad och gladlynt</span>
+            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2UPPRYMD">0 / 22</span><span class="clue-sum-total">22</span></span>
+        </div><div class="clue-item" data-word="3RUND">
+            <span class="clue-number">3</span>
+            <span class="clue-text">En form av sfärisk skugga</span>
+            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3RUND">0 / 11</span><span class="clue-sum-total">11</span></span>
+        </div></div>
+            <div class="print-only-section">
+                <h3>🧩 Instruktion</h3>
+                <p></p>
+                <h3>🔢 Bokstavsvärden</h3>
+                <div class="values-box">
+                    <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
+                    <div class="val-row"><div class="val-letters"><span class="val-letter">G</span><span class="val-letter">H</span><span class="val-letter">I</span><span class="val-letter">J</span><span class="val-letter">K</span><span class="val-letter">L</span></div><span class="val-equals">=</span><span class="val-number">2</span></div>
+                    <div class="val-row"><div class="val-letters"><span class="val-letter">M</span><span class="val-letter">N</span><span class="val-letter">O</span><span class="val-letter">P</span><span class="val-letter">Q</span><span class="val-letter">R</span></div><span class="val-equals">=</span><span class="val-number">3</span></div>
+                    <div class="val-row"><div class="val-letters"><span class="val-letter">S</span><span class="val-letter">T</span><span class="val-letter">U</span><span class="val-letter">V</span><span class="val-letter">W</span><span class="val-letter">X</span></div><span class="val-equals">=</span><span class="val-number">4</span></div>
+                    <div class="val-row"><div class="val-letters"><span class="val-letter">Y</span><span class="val-letter">Z</span><span class="val-letter">Å</span><span class="val-letter">Ä</span><span class="val-letter">Ö</span></div><span class="val-equals">=</span><span class="val-number">5</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var puzzleText = "Mitt i ring är ingenting förutom där omkring";
+    var solutionWord = "QSATURNUS";
+    var clueData = [{"id":1,"text":"Får taxa på banan","answer":"1PLANET"},{"id":2,"text":"Lättad och gladlynt","answer":"2UPPRYMD"},{"id":3,"text":"En form av sfärisk skugga","answer":"3RUND"}];
+    var grid = [[null,null,null,null,null,"2",null,null,null,null,null,null,null,null,null],[null,null,"1",null,null,"U",null,null,null,null,null,null,null,null,null],[null,null,"P",null,null,"P",null,"3",null,null,null,null,null,null,null],[null,null,"L",null,null,"P",null,"R",null,null,null,null,null,null,null],["Q","S","A","T","U","R","N","U","S",null,null,null,null,null,null],[null,null,"N",null,null,"Y",null,"N",null,null,null,null,null,null,null],[null,null,"E",null,null,"M",null,"D",null,null,null,null,null,null,null],[null,null,"T",null,null,"D",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
+    var gridSize = 15;
+    var playerInputs = {};
+    var activeWord = null;
+    var winShown = false;
+
+    var givenCells = {"1-2":"1","0-5":"2","2-7":"3","4-0":"Q"};
+    for (var cellId in givenCells) {
+        playerInputs[cellId] = givenCells[cellId];
+    }
+
+    function getLetterValue(ch) {
+        var u = ch.toUpperCase();
+        if ("ABCDEF".indexOf(u) !== -1) return 1;
+        if ("GHIJKL".indexOf(u) !== -1) return 2;
+        if ("MNOPQR".indexOf(u) !== -1) return 3;
+        if ("STUVWX".indexOf(u) !== -1) return 4;
+        if ("YZÅÄÖ".indexOf(u) !== -1) return 5;
+        return 0;
+    }
+
+    function calculateWordSum(word) {
+        var sum = 0;
+        for (var i = 0; i < word.length; i++) {
+            sum += getLetterValue(word.charAt(i));
+        }
+        return sum;
+    }
+
+    function findWordPositions(g, w) {
+        var size = g.length;
+        for (var y = 0; y < size; y++) {
+            var row = '', startX = -1;
+            for (var x = 0; x < size; x++) {
+                if (g[y][x] !== null) {
+                    if (startX === -1) startX = x;
+                    row += g[y][x];
+                } else {
+                    if (row === w) return { y: y, x: startX, direction: 'H' };
+                    row = '';
+                    startX = -1;
+                }
+            }
+            if (row === w) return { y: y, x: startX, direction: 'H' };
+        }
+        for (var x = 0; x < size; x++) {
+            var col = '', startY = -1;
+            for (var y = 0; y < size; y++) {
+                if (g[y][x] !== null) {
+                    if (startY === -1) startY = y;
+                    col += g[y][x];
+                } else {
+                    if (col === w) return { y: startY, x: x, direction: 'V' };
+                    col = '';
+                    startY = -1;
+                }
+            }
+            if (col === w) return { y: startY, x: x, direction: 'V' };
+        }
+        return null;
+    }
+
+    var wordMap = {};
+    for (var i = 0; i < clueData.length; i++) {
+        var pos = findWordPositions(grid, clueData[i].answer);
+        if (pos) wordMap[clueData[i].answer] = pos;
+    }
+    var solutionPos = findWordPositions(grid, solutionWord);
+    if (solutionPos) wordMap[solutionWord] = solutionPos;
+
+    var wordDirections = {};
+    for (var word in wordMap) wordDirections[word] = wordMap[word].direction;
+
+    var wordOrder = clueData.map(function(c) { return c.answer; }).concat([solutionWord]);
+
+    var allWordInputs = {};
+    var cellWords = {};
+    var cellCoords = {};
+
+    function buildMaps() {
+        cellWords = {};
+        cellCoords = {};
+        for (var word in wordMap) {
+            var pos = wordMap[word];
+            if (pos.direction === 'H') {
+                for (var i = 0; i < word.length; i++) {
+                    var cellId = pos.y + '-' + (pos.x + i);
+                    if (!cellWords[cellId]) cellWords[cellId] = [];
+                    if (cellWords[cellId].indexOf(word) === -1) cellWords[cellId].push(word);
+                    cellCoords[cellId] = { x: pos.x + i, y: pos.y };
+                }
+            } else if (pos.direction === 'V') {
+                for (var i = 0; i < word.length; i++) {
+                    var cellId = (pos.y + i) + '-' + pos.x;
+                    if (!cellWords[cellId]) cellWords[cellId] = [];
+                    if (cellWords[cellId].indexOf(word) === -1) cellWords[cellId].push(word);
+                    cellCoords[cellId] = { x: pos.x, y: pos.y + i };
+                }
+            }
+        }
+    }
+    buildMaps();
+
+    function renderGame() {
+        var allInputs = document.querySelectorAll('#crosswordGrid input');
+        for (var i = 0; i < allInputs.length; i++) {
+            var inp = allInputs[i];
+            var cellId = inp.dataset.cellId;
+            inp.value = playerInputs[cellId] || '';
+        }
+        for (var j = 0; j < clueData.length; j++) {
+            var clue = clueData[j];
+            var liveSpan = document.getElementById('sum-live-' + clue.answer);
+            if (liveSpan) {
+                var currentSum = 0;
+                var inputs = allWordInputs[clue.answer] || [];
+                for (var k = 0; k < inputs.length; k++) {
+                    var val = inputs[k].value.trim().toUpperCase();
+                    if (val) currentSum += getLetterValue(val);
+                }
+                liveSpan.textContent = currentSum + ' / ' + calculateWordSum(clue.answer);
+            }
+        }
+    }
+
+    (function init() {
+        var inputs = document.querySelectorAll('#crosswordGrid input');
+        for (var i = 0; i < inputs.length; i++) {
+            var inp = inputs[i];
+            var cellId = inp.dataset.cellId;
+            var words = cellWords[cellId] || [];
+            for (var j = 0; j < words.length; j++) {
+                var word = words[j];
+                if (!allWordInputs[word]) allWordInputs[word] = [];
+                allWordInputs[word].push(inp);
+            }
+        }
+        for (var word in allWordInputs) {
+            var dir = wordDirections[word];
+            allWordInputs[word].sort(function(a, b) {
+                var ay = parseInt(a.dataset.cellId.split('-')[0]);
+                var ax = parseInt(a.dataset.cellId.split('-')[1]);
+                var by = parseInt(b.dataset.cellId.split('-')[0]);
+                var bx = parseInt(b.dataset.cellId.split('-')[1]);
+                return dir === 'H' ? ax - bx : ay - by;
+            });
+        }
+
+        var banner = document.getElementById('puzzleBanner');
+        banner.onmouseenter = function() { setOutlineWord(solutionWord, true); };
+        banner.onmouseleave = function() { setOutlineWord(solutionWord, false); };
+        banner.onclick = function() { activateClue(solutionWord); };
+
+        var clueItems = document.querySelectorAll('.clue-item');
+        for (var i = 0; i < clueItems.length; i++) {
+            (function(item) {
+                var word = item.dataset.word;
+                item.onmouseenter = function() { setOutlineWord(word, true); };
+                item.onmouseleave = function() { setOutlineWord(word, false); };
+                item.onclick = function() { activateClue(word); };
+            })(clueItems[i]);
+        }
+
+        for (var i = 0; i < inputs.length; i++) {
+            (function(input) {
+                input.addEventListener('focus', function() {
+                    this.select();
+                    var cellId = this.dataset.cellId;
+                    var words = cellWords[cellId] || [];
+                    if (activeWord && words.indexOf(activeWord) !== -1) {
+                    } else {
+                        var preferred = words.find(function(w) { return w !== solutionWord; }) || solutionWord;
+                        setActiveWord(preferred);
+                    }
+                });
+                input.addEventListener('input', function() {
+                    this.value = this.value.toUpperCase();
+                    var cellId = this.dataset.cellId;
+                    playerInputs[cellId] = this.value;
+                    if (activeWord && allWordInputs[activeWord]) {
+                        var arr = allWordInputs[activeWord];
+                        var idx = arr.indexOf(this);
+                        if (idx !== -1 && idx < arr.length - 1) {
+                            arr[idx + 1].focus();
+                        }
+                    }
+                    updateAllFilledStatus();
+                    renderGame();
+                });
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Tab') {
+                        e.preventDefault();
+                        if (activeWord && wordOrder.indexOf(activeWord) !== -1) {
+                            var nextIdx = (wordOrder.indexOf(activeWord) + 1) % wordOrder.length;
+                            var nextWord = wordOrder[nextIdx];
+                            if (allWordInputs[nextWord] && allWordInputs[nextWord].length > 0) {
+                                setActiveWord(nextWord);
+                                allWordInputs[nextWord][0].focus();
+                            }
+                        }
+                        return;
+                    }
+                    if (e.key === 'Backspace' && this.value === '') {
+                        if (activeWord && allWordInputs[activeWord]) {
+                            var arr = allWordInputs[activeWord];
+                            var idx = arr.indexOf(this);
+                            if (idx > 0) {
+                                arr[idx - 1].focus();
+                            }
+                        }
+                        e.preventDefault();
+                        return;
+                    }
+                    var arrowKeys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
+                    if (arrowKeys.indexOf(e.key) !== -1) {
+                        e.preventDefault();
+                        var cellId = this.dataset.cellId;
+                        var coords = cellCoords[cellId];
+                        if (!coords) return;
+                        var newX = coords.x;
+                        var newY = coords.y;
+                        var stepX = e.key === 'ArrowRight' ? 1 : (e.key === 'ArrowLeft' ? -1 : 0);
+                        var stepY = e.key === 'ArrowDown' ? 1 : (e.key === 'ArrowUp' ? -1 : 0);
+                        newX += stepX;
+                        newY += stepY;
+                        var found = false;
+                        while (newY >= 0 && newY < gridSize && newX >= 0 && newX < gridSize) {
+                            var newCellId = newY + '-' + newX;
+                            var newInput = document.querySelector('input[data-cell-id="' + newCellId + '"]');
+                            if (newInput) {
+                                newInput.focus();
+                                var words = cellWords[newCellId] || [];
+                                if (activeWord && words.indexOf(activeWord) !== -1) {
+                                } else {
+                                    var preferred = words.find(function(w) { return w !== solutionWord; }) || solutionWord;
+                                    setActiveWord(preferred);
+                                }
+                                found = true;
+                                break;
+                            }
+                            var td = document.querySelector('td.active[data-cell-id="' + newCellId + '"]');
+                            if (!td) break;
+                            newX += stepX;
+                            newY += stepY;
+                        }
+                        if (!found) {
+                            this.focus();
+                        }
+                    }
+                });
+                input.addEventListener('click', function() {
+                    this.select();
+                    var cellId = this.dataset.cellId;
+                    var words = cellWords[cellId] || [];
+                    if (activeWord && words.indexOf(activeWord) !== -1) {
+                    } else {
+                        var preferred = words.find(function(w) { return w !== solutionWord; }) || solutionWord;
+                        setActiveWord(preferred);
+                    }
+                });
+            })(inputs[i]);
+        }
+
+        updateAllFilledStatus();
+        renderGame();
+
+        var modal = document.getElementById('helpModal');
+        var btn = document.getElementById('helpBtn');
+        var closeBtn = document.getElementById('closeModal');
+        btn.onclick = function() { modal.style.display = 'block'; }
+        closeBtn.onclick = function() { modal.style.display = 'none'; }
+        window.onclick = function(event) { if (event.target == modal) modal.style.display = 'none'; }
+    })();
+
+    function setActiveWord(word) {
+        if (activeWord) {
+            setOutlineWord(activeWord, false);
+            var items = document.querySelectorAll('.clue-item');
+            for (var i = 0; i < items.length; i++) items[i].classList.remove('active-clue');
+        }
+        activeWord = word;
+        if (activeWord) {
+            setOutlineWord(activeWord, true);
+            var clueItem = document.querySelector('.clue-item[data-word="' + activeWord + '"]');
+            if (clueItem) clueItem.classList.add('active-clue');
+        }
+    }
+
+    function setOutlineWord(word, on) {
+        for (var cellId in cellWords) {
+            if (cellWords[cellId].indexOf(word) !== -1) {
+                var td = document.querySelector('td.active[data-cell-id="' + cellId + '"]');
+                if (td) {
+                    if (td.classList.contains('given')) continue;
+                    if (on) td.classList.add('word-active');
+                    else td.classList.remove('word-active');
+                }
+            }
+        }
+    }
+
+    function activateClue(word) {
+        if (!allWordInputs[word]) return;
+        setActiveWord(word);
+        allWordInputs[word][0].focus();
+    }
+
+    function updateAllFilledStatus() {
+        var correctWords = {};
+        for (var word in wordMap) {
+            var inputs = allWordInputs[word];
+            if (!inputs) continue;
+            correctWords[word] = true;
+            for (var i = 0; i < inputs.length; i++) {
+                var cellId = inputs[i].dataset.cellId;
+                var parts = cellId.split('-');
+                var y = parseInt(parts[0]);
+                var x = parseInt(parts[1]);
+                if (playerInputs[cellId] !== grid[y][x]) {
+                    correctWords[word] = false;
+                    break;
+                }
+            }
+            if (correctWords[word]) {
+                var pos = wordMap[word];
+                if (pos) {
+                    if (pos.direction === 'H') {
+                        for (var i = 0; i < word.length; i++) {
+                            var cellId = pos.y + '-' + (pos.x + i);
+                            if (givenCells[cellId] && playerInputs[cellId] !== grid[pos.y][pos.x + i]) {
+                                correctWords[word] = false;
+                                break;
+                            }
+                        }
+                    } else {
+                        for (var i = 0; i < word.length; i++) {
+                            var cellId = (pos.y + i) + '-' + pos.x;
+                            if (givenCells[cellId] && playerInputs[cellId] !== grid[pos.y + i][pos.x]) {
+                                correctWords[word] = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        var clueItems = document.querySelectorAll('.clue-item');
+        for (var i = 0; i < clueItems.length; i++) {
+            var word = clueItems[i].dataset.word;
+            if (correctWords[word]) {
+                clueItems[i].classList.add('correct-clue');
+            } else {
+                clueItems[i].classList.remove('correct-clue');
+            }
+        }
+
+        var tds = document.querySelectorAll('#crosswordGrid td.active');
+        for (var i = 0; i < tds.length; i++) {
+            var td = tds[i];
+            var cellId = td.dataset.cellId;
+            if (!cellId) continue;
+            var wordsForCell = cellWords[cellId] || [];
+            var isSolutionCell = wordsForCell.indexOf(solutionWord) !== -1;
+            td.classList.remove('solution-correct');
+            if (isSolutionCell && correctWords[solutionWord]) {
+                td.classList.add('solution-correct');
+            }
+        }
+
+        var winDiv = document.getElementById('winMessage');
+        if (correctWords[solutionWord] && !winShown) {
+            winDiv.style.display = 'block';
+            winShown = true;
+        } else if (!correctWords[solutionWord]) {
+            winDiv.style.display = 'none';
+            winShown = false;
+        }
+    }
+
+    window.resetGame = function() {
+        playerInputs = {};
+        for (var cellId in givenCells) {
+            playerInputs[cellId] = givenCells[cellId];
+        }
+        activeWord = null;
+        winShown = false;
+        document.getElementById('winMessage').style.display = 'none';
+        renderGame();
+        var tds = document.querySelectorAll('#crosswordGrid td.active');
+        for (var i = 0; i < tds.length; i++) {
+            tds[i].classList.remove('solution-correct', 'word-active');
+        }
+        var items = document.querySelectorAll('.clue-item');
+        for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove('correct-clue', 'active-clue');
+        }
+    };
+</script>
+</body>
+</html>
             <span class="clue-text">Får taxa på banan</span>
             <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1PLANET">0 / 14</span><span class="clue-sum-total">14</span></span>
         </div><div class="clue-item" data-word="2UPPRYMD">
