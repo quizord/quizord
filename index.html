@@ -98,24 +98,14 @@
         }
 
         /* Bokstavstabell under ledtrådarna */
-        .values-box { display: flex; flex-direction: column; gap: 2px; margin: clamp(10px, 2vw, 20px) 0; padding: clamp(8px, 1.5vw, 12px); background: #f1f2f6; border-radius: 6px; }
+        .values-box { display: flex; flex-direction: column; gap: 2px; margin: clamp(10px, 2vw, 20px) 0 0 0; padding: clamp(8px, 1.5vw, 12px); background: #f1f2f6; border-radius: 6px; }
         .val-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
         .val-letters { display: flex; gap: 3px; min-width: 170px; }
         .val-letter { background: white; padding: 2px 6px; border-radius: 4px; border: 1px solid #ddd; font-size: 13px; }
         .val-equals { font-weight: normal; margin: 0 2px; width: 14px; text-align: center; }
         .val-number { background: #2c3e50; color: white; padding: 2px 8px; border-radius: 6px; font-weight: normal; font-size: 13px; min-width: 26px; text-align: center; }
 
-        /* Instruktion under tabellen */
-        .instruction-text { 
-            margin-top: clamp(10px, 2vw, 20px); 
-            padding: clamp(8px, 1.5vw, 12px); 
-            background: #f8f9fa; 
-            border-radius: 6px; 
-            font-style: italic; 
-            color: #2c3e50; 
-        }
-
-        /* Modal endast för ? */
+        /* Modal för instruktion */
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
         .modal-content { background: #ffffff; color: #2c3e50; margin: 10% auto; padding: 25px; border-radius: 12px; width: 80%; max-width: 600px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); position: relative; font-size: 1.1rem; }
         .modal-content h3 { margin-top: 0; }
@@ -152,7 +142,7 @@
         <div class="banner-right" id="helpBtn" title="Instruktioner">?</div>
     </div>
 
-    <!-- Modal endast för instruktionstext -->
+    <!-- Modal för instruktion (popup) -->
     <div id="helpModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
@@ -256,7 +246,7 @@
             <span class="clue-text">En form av sfärisk skugga</span>
             <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3RUND">0 / 11</span><span class="clue-sum-total">11</span></span>
         </div></div>
-            <!-- Bokstavstabell alltid synlig -->
+            <!-- Bokstavstabell permanent under ledtrådarna -->
             <h3 style="font-family:'Segoe UI',sans-serif;margin-top:15px;">🔢 Bokstavsvärden</h3>
             <div class="values-box">
                 <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
@@ -265,8 +255,6 @@
                 <div class="val-row"><div class="val-letters"><span class="val-letter">S</span><span class="val-letter">T</span><span class="val-letter">U</span><span class="val-letter">V</span><span class="val-letter">W</span><span class="val-letter">X</span></div><span class="val-equals">=</span><span class="val-number">4</span></div>
                 <div class="val-row"><div class="val-letters"><span class="val-letter">Y</span><span class="val-letter">Z</span><span class="val-letter">Å</span><span class="val-letter">Ä</span><span class="val-letter">Ö</span></div><span class="val-equals">=</span><span class="val-number">5</span></div>
             </div>
-            <!-- Instruktion under tabellen -->
-            <div class="instruction-text">🧩 Så här löser du ordspelet: Fyll i korsordet med hjälp av ledtrådarna. Varje bokstav har ett värde (se tabellen). När alla ord är rätt ifyllda har du tre nyckelord till hjälp för att få fram lösningsordet!</div>
         </div>
     </div>
 </div>
