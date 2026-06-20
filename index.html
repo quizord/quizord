@@ -9,42 +9,46 @@
         * { box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            background: #8e8e8e; 
-            padding: 20px; 
-            width: 95%;
-            max-width: 1100px; 
+            background: #7c7c7c; 
+            padding: clamp(10px, 2vw, 25px); 
+            width: 95%; 
+            max-width: 1400px; 
             margin: 0 auto; 
-            font-size: 1.1rem; 
+            font-size: clamp(1rem, 2vw, 1.2rem); 
         }
-        .container { background: #c0c0c0; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { background: #c0c0c0; padding: clamp(15px, 2vw, 30px); border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .puzzle-banner { 
-            background: #0000a0; color: #ffffff; 
-            padding: 18px 25px; border-radius: 10px; margin-bottom: 20px; 
+            background: #000080; color: #ffffff; 
+            padding: clamp(12px, 2vw, 20px) clamp(15px, 2vw, 25px); 
+            border-radius: 10px; margin-bottom: clamp(12px, 2vw, 20px); 
             display: flex; align-items: center; justify-content: space-between; 
             box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
             cursor: pointer; flex-wrap: wrap;
         }
-        .banner-left { display: flex; align-items: baseline; gap: 10px; }
-        .logo { font-size: 2rem; font-weight: 900; letter-spacing: 2px; }
-        .logo-sub { font-size: 0.9rem; opacity: 0.8; }
-        .banner-center { flex: 1; text-align: center; font-size: 1.7rem; font-weight: bold; padding: 0 25px; }
-        .banner-right { font-size: 2rem; cursor: pointer; background: rgba(255,255,255,0.2); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+        .banner-left { display: flex; align-items: baseline; gap: clamp(4px, 1vw, 10px); }
+        .logo { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: 2px; }
+        .logo-sub { font-size: clamp(0.6rem, 1.2vw, 0.9rem); opacity: 0.8; }
+        .banner-center { flex: 1; text-align: center; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: bold; padding: 0 clamp(10px, 2vw, 25px); }
+        .banner-right { font-size: clamp(1.2rem, 2.5vw, 2rem); cursor: pointer; background: rgba(255,255,255,0.2); border-radius: 50%; width: clamp(32px, 5vw, 44px); height: clamp(32px, 5vw, 44px); display: flex; align-items: center; justify-content: center; }
         .banner-right:hover { background: rgba(255,255,255,0.4); }
-        .top-bar { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; flex-wrap: wrap; }
-        .top-bar button { background: #ecf0f1; border: none; border-radius: 6px; padding: 10px 18px; cursor: pointer; font-weight: 600; color: #2c3e50; transition: 0.2s; font-size: 1.05rem; }
+        .top-bar { display: flex; align-items: center; gap: 15px; margin-bottom: clamp(12px, 2vw, 18px); flex-wrap: wrap; }
+        .top-bar button { background: #ecf0f1; border: none; border-radius: 6px; padding: clamp(6px, 1vw, 10px) clamp(12px, 2vw, 18px); cursor: pointer; font-weight: 600; color: #2c3e50; transition: 0.2s; font-size: clamp(0.9rem, 1.5vw, 1.05rem); }
         .top-bar button:hover { background: #d5dbdb; }
-        .clues-heading { margin: 0; font-family: 'Segoe UI', sans-serif; font-size: 1.6rem; }
-        .win-message { background: #f1c40f; color: #1a1a1a; font-weight: 800; font-size: 1.4rem; padding: 12px 22px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); animation: pulse 1.5s infinite, shimmer 2s infinite; position: relative; overflow: hidden; display: none; text-shadow: 0 1px 3px rgba(255,255,255,0.7); }
+        .clues-heading { margin: 0; font-family: 'Segoe UI', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+        .win-message { background: #f1c40f; color: #1a1a1a; font-weight: 800; font-size: clamp(1rem, 2vw, 1.4rem); padding: clamp(8px, 1.5vw, 12px) clamp(14px, 2vw, 22px); border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); animation: pulse 1.5s infinite, shimmer 2s infinite; position: relative; overflow: hidden; display: none; text-shadow: 0 1px 3px rgba(255,255,255,0.7); }
         @keyframes pulse { 0% { box-shadow: 0 0 4px #f1c40f; } 50% { box-shadow: 0 0 10px #f1c40f; } 100% { box-shadow: 0 0 4px #f1c40f; } }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .win-message::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 70%); animation: shimmer 2s infinite; transform: rotate(25deg); }
-        .play-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; align-items: flex-start; }
-        .grid-wrapper { flex: 0 0 auto; padding: 10px; border: 3px solid #333333; border-radius: 10px; background: #408080; }
+        .play-grid { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 20px); justify-content: center; align-items: flex-start; }
+        .grid-wrapper { flex: 0 0 auto; padding: clamp(5px, 1vw, 10px); border: 3px solid #333333; border-radius: 10px; background: #408080; }
         table.grid { border-collapse: collapse; margin: 0 auto; table-layout: fixed; }
         td { 
-            width: 56px; height: 56px; 
+            width: clamp(40px, 5vw, 65px); 
+            height: clamp(40px, 5vw, 65px); 
             border: 1.5px solid #333333; 
-            text-align: center; font-size: 28px; font-weight: normal; 
+            text-align: center; 
+            font-size: clamp(20px, 3.5vw, 32px); 
+            font-weight: normal; 
             vertical-align: middle; background: white; 
             transition: outline 0.15s; position: relative; 
             outline: 2px solid transparent; 
@@ -53,37 +57,39 @@
         td.empty { border: none; background: transparent; outline: none; }
         td.active { background: #ffffff; }
         td.given { background: #bbdefb; }
-        td.solution-given { background: #0000a0; }
+        td.solution-given { background: #000080; }
         td.solution-given .given-letter { color: white; }
         td.dash-given { background: #e0e0e0; }
         td.dash-given span { color: #333; font-weight: normal; }
         td.given .given-letter { 
             display: flex; align-items: center; justify-content: center; 
-            width: 100%; height: 100%; font-size: 28px; 
+            width: 100%; height: 100%; 
+            font-size: clamp(20px, 3.5vw, 32px); 
             font-family: 'Patrick Hand', Verdana, sans-serif; 
         }
-        td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fff255; }
+        td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fff788; }
         td.active[data-solution="true"] input:focus { background: #fff9c4; }
-        td.active input { width: 100%; height: 100%; border: none; text-align: center; font-size: 28px; font-weight: normal; background: transparent; outline: none; text-transform: uppercase; padding: 0; margin: 0; cursor: pointer; font-family: 'Patrick Hand', Verdana, sans-serif; }
+        td.active input { width: 100%; height: 100%; border: none; text-align: center; font-size: clamp(20px, 3.5vw, 32px); font-weight: normal; background: transparent; outline: none; text-transform: uppercase; padding: 0; margin: 0; cursor: pointer; font-family: 'Patrick Hand', Verdana, sans-serif; }
         td.active input:focus { background: #fcf8e3; }
         td.word-active { outline-color: #5dade2; }
         td.given.word-active { outline-color: transparent; }
         td.solution-correct { background: #fff3cd; border-color: #ffc107; color: #856404; animation: pulse 1.5s infinite; }
-        td.solution-given.solution-correct { animation: none; background: #0000a0; border-color: #333; color: white; }
-        .play-clues { flex: 1; min-width: 220px; margin-top: 0; }
-        .clue-item { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; padding: 12px 16px; border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: 1.4rem; }
+        td.solution-given.solution-correct { animation: none; background: #000080; border-color: #333; color: white; }
+        .play-clues { flex: 1; min-width: min(220px, 100%); margin-top: 0; }
+        .clue-item { display: flex; align-items: center; gap: clamp(8px, 1.5vw, 12px); margin-bottom: clamp(6px, 1vw, 10px); padding: clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px); border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: clamp(1rem, 2vw, 1.4rem); }
         .clue-item:hover { background: #ecf0f1; transform: translateX(4px); }
         .clue-item.active-clue { border-left-color: #3498db; background: #e8f4fd; }
-        .clue-item.correct-clue { border-left-color: #28a745; background: #9dd7ac; }
+        .clue-item.correct-clue { border-left-color: #28a745; background: #a6d9b3; }
         .clue-number { 
             display: inline-flex; align-items: center; justify-content: center; 
-            width: 36px; height: 36px; line-height: 36px; text-align: center; 
+            width: clamp(28px, 4vw, 36px); height: clamp(28px, 4vw, 36px); 
+            line-height: clamp(28px, 4vw, 36px); text-align: center; 
             background: #bbdefb; 
-            color: #000040; 
-            border-radius: 6px; font-size: 1.4rem; 
+            color: #400040; 
+            border-radius: 6px; font-size: clamp(1rem, 2vw, 1.4rem); 
         }
         .clue-text { font-weight: normal; flex: 1; color: #2c3e50; }
-        .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: 90px; padding: 5px 8px; text-align: center; font-weight: normal; font-size: 1.15rem; color: #2c3e50; white-space: nowrap; font-family: 'Segoe UI', sans-serif; }
+        .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: clamp(70px, 10vw, 90px); padding: clamp(3px, 0.5vw, 5px) clamp(5px, 1vw, 8px); text-align: center; font-weight: normal; font-size: clamp(0.9rem, 1.5vw, 1.15rem); color: #2c3e50; white-space: nowrap; font-family: 'Segoe UI', sans-serif; }
         .clue-sum-live { }
         .clue-sum-total { display: none; }
         @media print {
@@ -105,11 +111,11 @@
         .print-only-section { display: none; }
         @media print {
             .print-only-section { display: block; margin-top: 15px; }
-            body { background: white; padding: 0.5cm; max-width: 100%; }
+            body { background: white; padding: 0.5cm; max-width: 100%; width: 100%; font-size: 12pt; }
             .container { box-shadow: none; padding: 0; }
             .top-bar button, .win-message { display: none; }
             .puzzle-banner { 
-                background: #0000a0; 
+                background: #000080; 
                 color: #ffffff; 
                 padding: 15px; margin-bottom: 10px; 
             }
@@ -130,7 +136,7 @@
             <span class="logo">QwizOrd</span>
             <span class="logo-sub">— språk & fantasi —</span>
         </div>
-        <div class="banner-center">"HAR MAN I STÄLLET FÖR HÅR"</div>
+        <div class="banner-center">"Mitt i ring är ingenting förutom där omkring"</div>
         <div class="banner-right" id="helpBtn" title="Instruktioner">?</div>
     </div>
 
@@ -138,7 +144,7 @@
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
             <h3>🧩 Så här löser du</h3>
-            <p>Så här löser du ordspelet...</p>
+            <p>Så här löser du ordspelet: Fyll i korsordet med hjälp av ledtrådarna. Varje bokstav har ett värde (se tabellen). När alla ord är rätt ifyllda har du tre nyckelord till hjälp för att få fram lösningsordet!</p>
             <h3>🔢 Bokstavsvärden</h3>
             <div class="values-box">
                 <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
@@ -156,83 +162,98 @@
         <h3 class="clues-heading">📝 Ledtrådar</h3>
     </div>
     <div class="play-grid">
-        <div class="grid-wrapper"><table class="grid" id="crosswordGrid"><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active given solution-given" data-cell-id="0-3" data-solution="true">
-                    <span class="given-letter">Q</span>
-                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="active given" data-cell-id="1-1" data-solution="false">
-                    <span class="given-letter">3</span>
-                </td><td class="active" data-cell-id="1-2" data-solution="false">
-                    <input type="text" maxlength="1" data-cell-id="1-2" value="" 
-                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="1-3" data-solution="true">
-                    <input type="text" maxlength="1" data-cell-id="1-3" value="" 
-                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="1-4" data-solution="false">
-                    <input type="text" maxlength="1" data-cell-id="1-4" value="" 
-                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="1-5" data-solution="false">
+        <div class="grid-wrapper"><table class="grid" id="crosswordGrid"><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active given" data-cell-id="0-5" data-solution="false">
+                    <span class="given-letter">2</span>
+                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active given" data-cell-id="1-2" data-solution="false">
+                    <span class="given-letter">1</span>
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="1-5" data-solution="false">
                     <input type="text" maxlength="1" data-cell-id="1-5" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="1-6" data-solution="false">
-                    <input type="text" maxlength="1" data-cell-id="1-6" value="" 
+                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="2-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="2-2" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="2-3" data-solution="true">
-                    <input type="text" maxlength="1" data-cell-id="2-3" value="" 
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="2-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="2-5" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="empty"></td><td class="active given" data-cell-id="3-1" data-solution="false">
-                    <span class="given-letter">1</span>
-                </td><td class="active" data-cell-id="3-2" data-solution="false">
+                </td><td class="empty"></td><td class="active given" data-cell-id="2-7" data-solution="false">
+                    <span class="given-letter">3</span>
+                </td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="3-2" data-solution="false">
                     <input type="text" maxlength="1" data-cell-id="3-2" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="3-3" data-solution="true">
-                    <input type="text" maxlength="1" data-cell-id="3-3" value="" 
-                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="3-4" data-solution="false">
-                    <input type="text" maxlength="1" data-cell-id="3-4" value="" 
-                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="3-5" data-solution="false">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="3-5" data-solution="false">
                     <input type="text" maxlength="1" data-cell-id="3-5" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="4-3" data-solution="true">
+                </td><td class="empty"></td><td class="active" data-cell-id="3-7" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="3-7" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td></tr><tr><td class="active given solution-given" data-cell-id="4-0" data-solution="true">
+                    <span class="given-letter">Q</span>
+                </td><td class="active" data-cell-id="4-1" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-1" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-2" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-3" data-solution="true">
                     <input type="text" maxlength="1" data-cell-id="4-3" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr><tr><td class="active given" data-cell-id="5-0" data-solution="false">
-                    <span class="given-letter">2</span>
-                </td><td class="active" data-cell-id="5-1" data-solution="false">
-                    <input type="text" maxlength="1" data-cell-id="5-1" value="" 
+                </td><td class="active" data-cell-id="4-4" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-4" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="5-2" data-solution="false">
+                </td><td class="active" data-cell-id="4-5" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-6" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-6" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-7" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-7" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="active" data-cell-id="4-8" data-solution="true">
+                    <input type="text" maxlength="1" data-cell-id="4-8" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="5-2" data-solution="false">
                     <input type="text" maxlength="1" data-cell-id="5-2" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="5-3" data-solution="true">
-                    <input type="text" maxlength="1" data-cell-id="5-3" value="" 
-                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="5-4" data-solution="false">
-                    <input type="text" maxlength="1" data-cell-id="5-4" value="" 
-                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="5-5" data-solution="false">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="5-5" data-solution="false">
                     <input type="text" maxlength="1" data-cell-id="5-5" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td><td class="active" data-cell-id="5-6" data-solution="false">
-                    <input type="text" maxlength="1" data-cell-id="5-6" value="" 
+                </td><td class="empty"></td><td class="active" data-cell-id="5-7" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="5-7" value="" 
                            oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
-                </td></tr></table></div>
+                </td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="6-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="6-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="6-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="6-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="active" data-cell-id="6-7" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="6-7" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td></tr><tr><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="7-2" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="7-2" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="active" data-cell-id="7-5" data-solution="false">
+                    <input type="text" maxlength="1" data-cell-id="7-5" value="" 
+                           oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g,'')">
+                </td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></table></div>
         <div class="play-clues">
-            <div id="clueList"><div class="clue-item" data-word="1DJUR">
+            <div id="clueList"><div class="clue-item" data-word="1PLANET">
             <span class="clue-number">1</span>
-            <span class="clue-text">Finns många i naturens fauna</span>
-            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1DJUR">0 / 10</span><span class="clue-sum-total">10</span></span>
-        </div><div class="clue-item" data-word="2KONUNG">
+            <span class="clue-text">Får taxa på banan</span>
+            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1PLANET">0 / 14</span><span class="clue-sum-total">14</span></span>
+        </div><div class="clue-item" data-word="2UPPRYMD">
             <span class="clue-number">2</span>
-            <span class="clue-text">Manligt statsöverhuvud</span>
-            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2KONUNG">0 / 17</span><span class="clue-sum-total">17</span></span>
-        </div><div class="clue-item" data-word="3FLOCK">
+            <span class="clue-text">Lätt5ad och gladlynt</span>
+            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2UPPRYMD">0 / 22</span><span class="clue-sum-total">22</span></span>
+        </div><div class="clue-item" data-word="3RUND">
             <span class="clue-number">3</span>
-            <span class="clue-text">Går får gärna i</span>
-            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3FLOCK">0 / 9</span><span class="clue-sum-total">9</span></span>
+            <span class="clue-text">En form av sfärisk skugga</span>
+            <span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3RUND">0 / 11</span><span class="clue-sum-total">11</span></span>
         </div></div>
             <div class="print-only-section">
                 <h3>🧩 Instruktion</h3>
-                <p>Så här löser du ordspelet...</p>
+                <p>Så här löser du ordspelet: Fyll i korsordet med hjälp av ledtrådarna. Varje bokstav har ett värde (se tabellen). När alla ord är rätt ifyllda har du tre nyckelord till hjälp för att få fram lösningsordet!</p>
                 <h3>🔢 Bokstavsvärden</h3>
                 <div class="values-box">
                     <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
@@ -246,16 +267,16 @@
     </div>
 </div>
 <script>
-    var puzzleText = "HAR MAN I STÄLLET FÖR HÅR";
-    var solutionWord = "QLEJON";
-    var clueData = [{"id":1,"text":"Finns många i naturens fauna","answer":"1DJUR"},{"id":2,"text":"Manligt statsöverhuvud","answer":"2KONUNG"},{"id":3,"text":"Går får gärna i","answer":"3FLOCK"}];
-    var grid = [[null,null,null,"Q",null,null,null,null,null,null,null,null,null,null,null],[null,"3","F","L","O","C","K",null,null,null,null,null,null,null,null],[null,null,null,"E",null,null,null,null,null,null,null,null,null,null,null],[null,"1","D","J","U","R",null,null,null,null,null,null,null,null,null],[null,null,null,"O",null,null,null,null,null,null,null,null,null,null,null],["2","K","O","N","U","N","G",null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
+    var puzzleText = "Mitt i ring är ingenting förutom där omkring";
+    var solutionWord = "QSATURNUS";
+    var clueData = [{"id":1,"text":"Får taxa på banan","answer":"1PLANET"},{"id":2,"text":"Lätt5ad och gladlynt","answer":"2UPPRYMD"},{"id":3,"text":"En form av sfärisk skugga","answer":"3RUND"}];
+    var grid = [[null,null,null,null,null,"2",null,null,null,null,null,null,null,null,null],[null,null,"1",null,null,"U",null,null,null,null,null,null,null,null,null],[null,null,"P",null,null,"P",null,"3",null,null,null,null,null,null,null],[null,null,"L",null,null,"P",null,"R",null,null,null,null,null,null,null],["Q","S","A","T","U","R","N","U","S",null,null,null,null,null,null],[null,null,"N",null,null,"Y",null,"N",null,null,null,null,null,null,null],[null,null,"E",null,null,"M",null,"D",null,null,null,null,null,null,null],[null,null,"T",null,null,"D",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
     var gridSize = 15;
     var playerInputs = {};
     var activeWord = null;
     var winShown = false;
 
-    var givenCells = {"3-1":"1","5-0":"2","1-1":"3","0-3":"Q"};
+    var givenCells = {"1-2":"1","0-5":"2","2-7":"3","4-0":"Q"};
     for (var cellId in givenCells) {
         playerInputs[cellId] = givenCells[cellId];
     }
