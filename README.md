@@ -11,7 +11,7 @@ En interaktiv ordgåta-app där du löser ett korsord för att hitta lösningsor
 
 ## 🌐 Spela Online
 
-➡️ **[Klicka här för att spela Quiz Ord](https://quizord.github.io/Quiz-Ord-/)**
+➡️ **[Klicka här för att spela Quiz Ord](https://quizord.github.io/quizord)**
 
 Spelet körs helt i din webbläsare — ingen installation eller inloggning behövs!
 
