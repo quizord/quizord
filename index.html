@@ -23,13 +23,13 @@
         .clues-heading { margin: 0; font-family: 'Segoe UI', sans-serif; font-size: clamp(1.1rem, 2.5vw, 1.4rem); }
         .win-message { background: #f1c40f; color: #1a1a1a; font-weight: 800; font-size: clamp(0.9rem, 2vw, 1.2rem); padding: clamp(6px, 1.5vw, 10px) clamp(12px, 2vw, 18px); border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); animation: pulse 1.5s infinite; position: relative; overflow: hidden; display: none; text-shadow: 0 1px 3px rgba(255,255,255,0.7); }
         @keyframes pulse { 0% { box-shadow: 0 0 4px #f1c40f; } 50% { box-shadow: 0 0 10px #f1c40f; } 100% { box-shadow: 0 0 4px #f1c40f; } }
-        /* ============ 50/50 LAYOUT ============ */
+        /* ============ FÖRBÄTTRAD 50/50 LAYOUT ============ */
         .play-grid { display: flex; flex-wrap: wrap; gap: clamp(16px, 3vw, 24px); justify-content: center; align-items: flex-start; }
-        .grid-half { flex: 1 1 45%; min-width: 280px; display: flex; justify-content: center; align-items: flex-start; }
-        .clues-half { flex: 1 1 45%; min-width: 280px; }
+        .grid-half { flex: 0 1 auto; min-width: 200px; max-width: 55%; display: flex; justify-content: center; align-items: flex-start; }
+        .clues-half { flex: 1 1 40%; min-width: 280px; max-width: 500px; }
         .grid-wrapper { display: inline-block; padding: clamp(4px, 1vw, 8px); border: 3px solid #333333; border-radius: 10px; background: #408080; }
         table.grid { border-collapse: collapse; margin: 0 auto; table-layout: fixed; }
-        td { width: clamp(36px, 4vw, 52px); height: clamp(36px, 4vw, 52px); border: 1.5px solid #333333; text-align: center; font-size: clamp(18px, 3vw, 26px); font-weight: normal; vertical-align: middle; background: white; transition: outline 0.15s; position: relative; outline: 2px solid transparent; box-sizing: border-box; }
+        td { width: clamp(40px, 4.909090909090909vw, 64px); height: clamp(40px, 4.909090909090909vw, 64px); border: 1.5px solid #333333; text-align: center; font-size: clamp(18px, 3vw, 26px); font-weight: normal; vertical-align: middle; background: white; transition: outline 0.15s; position: relative; outline: 2px solid transparent; box-sizing: border-box; }
         td.empty { border: none; background: transparent; outline: none; }
         td.active { background: #ffffff; }
         td.given { background: #bbdefb; }
@@ -55,18 +55,31 @@
         .clue-sum-total { display: none; }
         @media print { .clue-sum-live { display: none; } .clue-sum-total { display: inline; } }
         .clues-half h3 { margin: 8px 0 4px 0; }
-        .values-box { display: flex; flex-direction: column; gap: 2px; margin: clamp(8px, 2vw, 14px) 0 0 0; padding: clamp(6px, 1.5vw, 10px); background: #f1f2f6; border-radius: 6px; }
+        /* ============ VÄRDETABELL MED SPONSORBILD ============ */
+        .values-box { display: flex; gap: clamp(8px, 2vw, 16px); margin: clamp(8px, 2vw, 14px) 0 0 0; padding: clamp(6px, 1.5vw, 10px); background: #f1f2f6; border-radius: 6px; align-items: stretch; }
+        .values-left { display: flex; flex-direction: column; gap: 2px; flex: 1; }
         .val-row { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
         .val-letters { display: flex; gap: 2px; min-width: 150px; }
-        .val-letter { background: white; padding: 2px 5px; border-radius: 4px; border: 1px solid #ddd; font-size: 12px; }
-        .val-equals { font-weight: normal; margin: 0 2px; width: 12px; text-align: center; }
-        .val-number { background: #2c3e50; color: white; padding: 2px 6px; border-radius: 6px; font-size: 12px; min-width: 22px; text-align: center; }
+        .val-letter { background: white; padding: 2px 5px; border-radius: 4px; border: 1px solid #ddd; font-size: clamp(10px, 1.2vw, 12px); }
+        .val-equals { font-weight: normal; margin: 0 2px; width: 12px; text-align: center; font-size: clamp(10px, 1.2vw, 12px); }
+        .val-number { background: #2c3e50; color: white; padding: 2px 6px; border-radius: 6px; font-size: clamp(10px, 1.2vw, 12px); min-width: 22px; text-align: center; }
+        .sponsor-image-wrapper { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; min-width: 80px; max-width: 160px; background: #e8e8e8; border-radius: 6px; padding: clamp(4px, 1vw, 8px); overflow: hidden; }
+        .sponsor-image-wrapper.sponsor-empty { min-width: 50px; max-width: 80px; }
+        .sponsor-image { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+        .sponsor-placeholder { font-size: clamp(20px, 3vw, 32px); opacity: 0.4; }
+        .sponsor-fallback { font-size: clamp(20px, 3vw, 32px); opacity: 0.4; display: none; align-items: center; justify-content: center; width: 100%; height: 100%; }
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
         .modal-content { background: #004080; color: #ececec; margin: 10% auto; padding: 20px; border-radius: 12px; width: 80%; max-width: 550px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); position: relative; font-size: 1rem; }
         .close { position: absolute; top: 8px; right: 16px; font-size: 1.6rem; font-weight: bold; cursor: pointer; color: #aaa; }
         .close:hover { color: #000; }
         @media print { body { background: white; padding: 0.5cm; max-width: 100%; display: block; min-height: auto; } .container { box-shadow: none; max-width: 100%; } .top-bar button, .win-message { display: none; } }
-        @media (max-width: 650px) { .grid-half, .clues-half { flex: 1 1 100%; } .logo-img { height: clamp(35px, 10vw, 50px); } }
+        @media (max-width: 650px) { 
+            .grid-half { max-width: 100%; flex: 1 1 100%; } 
+            .clues-half { flex: 1 1 100%; max-width: 100%; } 
+            .values-box { flex-direction: column; }
+            .sponsor-image-wrapper { max-width: 100%; min-height: 60px; }
+            .logo-img { height: clamp(35px, 10vw, 50px); } 
+        }
     </style>
 </head>
 <body>
@@ -86,11 +99,14 @@
         <div class="clues-half"><div id="clueList"><div class="clue-item" data-word="1SAND"><span class="clue-number">1</span><span class="clue-text">Omkring oas</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-1SAND">0 / 9</span><span class="clue-sum-total">9</span></span></div><div class="clue-item" data-word="2TAGGAR"><span class="clue-number">2</span><span class="clue-text">Många på rivig tråd</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-2TAGGAR">0 / 13</span><span class="clue-sum-total">13</span></span></div><div class="clue-item" data-word="3GRÖN"><span class="clue-number">3</span><span class="clue-text">Är väl smaragden</span><span class="clue-sum-box"><span class="clue-sum-live" id="sum-live-3GRÖN">0 / 13</span><span class="clue-sum-total">13</span></span></div></div>
         <h3>🔢 Bokstavsvärden</h3>
         <div class="values-box">
-            <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
-            <div class="val-row"><div class="val-letters"><span class="val-letter">G</span><span class="val-letter">H</span><span class="val-letter">I</span><span class="val-letter">J</span><span class="val-letter">K</span><span class="val-letter">L</span></div><span class="val-equals">=</span><span class="val-number">2</span></div>
-            <div class="val-row"><div class="val-letters"><span class="val-letter">M</span><span class="val-letter">N</span><span class="val-letter">O</span><span class="val-letter">P</span><span class="val-letter">Q</span><span class="val-letter">R</span></div><span class="val-equals">=</span><span class="val-number">3</span></div>
-            <div class="val-row"><div class="val-letters"><span class="val-letter">S</span><span class="val-letter">T</span><span class="val-letter">U</span><span class="val-letter">V</span><span class="val-letter">W</span><span class="val-letter">X</span></div><span class="val-equals">=</span><span class="val-number">4</span></div>
-            <div class="val-row"><div class="val-letters"><span class="val-letter">Y</span><span class="val-letter">Z</span><span class="val-letter">Å</span><span class="val-letter">Ä</span><span class="val-letter">Ö</span></div><span class="val-equals">=</span><span class="val-number">5</span></div>
+            <div class="values-left">
+                <div class="val-row"><div class="val-letters"><span class="val-letter">A</span><span class="val-letter">B</span><span class="val-letter">C</span><span class="val-letter">D</span><span class="val-letter">E</span><span class="val-letter">F</span></div><span class="val-equals">=</span><span class="val-number">1</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">G</span><span class="val-letter">H</span><span class="val-letter">I</span><span class="val-letter">J</span><span class="val-letter">K</span><span class="val-letter">L</span></div><span class="val-equals">=</span><span class="val-number">2</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">M</span><span class="val-letter">N</span><span class="val-letter">O</span><span class="val-letter">P</span><span class="val-letter">Q</span><span class="val-letter">R</span></div><span class="val-equals">=</span><span class="val-number">3</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">S</span><span class="val-letter">T</span><span class="val-letter">U</span><span class="val-letter">V</span><span class="val-letter">W</span><span class="val-letter">X</span></div><span class="val-equals">=</span><span class="val-number">4</span></div>
+                <div class="val-row"><div class="val-letters"><span class="val-letter">Y</span><span class="val-letter">Z</span><span class="val-letter">Å</span><span class="val-letter">Ä</span><span class="val-letter">Ö</span></div><span class="val-equals">=</span><span class="val-number">5</span></div>
+            </div>
+            <div class="sponsor-image-wrapper sponsor-empty"><div class="sponsor-placeholder">🖼️</div></div>
         </div></div>
     </div>
 </div>
