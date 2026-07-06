@@ -107,12 +107,7 @@
     buildMaps();
     function renderGame(){var allInputs=document.querySelectorAll('#crosswordGrid input');for(var i=0;i<allInputs.length;i++){var inp=allInputs[i];inp.value=playerInputs[inp.dataset.cellId]||'';}for(var j=0;j<clueData.length;j++){var clue=clueData[j];var liveSpan=document.getElementById('sum-live-'+clue.answer);if(liveSpan){var currentSum=0;var inputs=allWordInputs[clue.answer]||[];for(var k=0;k<inputs.length;k++){var val=inputs[k].value.trim().toUpperCase();if(val)currentSum+=getLetterValue(val);}liveSpan.textContent=currentSum+' / '+clue.sum;}}}
     (function init(){var inputs=document.querySelectorAll('#crosswordGrid input');for(var i=0;i<inputs.length;i++){var inp=inputs[i];var words=cellWords[inp.dataset.cellId]||[];for(var j=0;j<words.length;j++){var word=words[j];if(!allWordInputs[word])allWordInputs[word]=[];allWordInputs[word].push(inp);}}for(var word in allWordInputs){var dir=wordDirections[word];allWordInputs[word].sort(function(a,b){var ay=parseInt(a.dataset.cellId.split('-')[0]),ax=parseInt(a.dataset.cellId.split('-')[1]),by=parseInt(b.dataset.cellId.split('-')[0]),bx=parseInt(b.dataset.cellId.split('-')[1]);return dir==='H'?ax-bx:ay-by;});}
-    // ============ FIX: ?-knapp triggar INTE tangentbord ============
-    var banner=document.getElementById('puzzleBanner');
-    banner.onmouseenter=function(){setOutlineWord(solutionWord,true);};
-    banner.onmouseleave=function(){setOutlineWord(solutionWord,false);};
-    banner.onclick=function(e){if(e.target===document.getElementById('helpBtn')||e.target.closest('#helpBtn'))return;activateClue(solutionWord);};
-    // ============ SLUT FIX ============
+    var banner=document.getElementById('puzzleBanner');banner.onmouseenter=function(){setOutlineWord(solutionWord,true);};banner.onmouseleave=function(){setOutlineWord(solutionWord,false);};banner.onclick=function(){activateClue(solutionWord);};
     var clueItems=document.querySelectorAll('.clue-item');for(var i=0;i<clueItems.length;i++){(function(item){var word=item.dataset.word;item.onmouseenter=function(){setOutlineWord(word,true);};item.onmouseleave=function(){setOutlineWord(word,false);};item.onclick=function(){activateClue(word);};})(clueItems[i]);}
     for(var i=0;i<inputs.length;i++){(function(input){
         input.addEventListener('focus',function(){this.select();var words=cellWords[this.dataset.cellId]||[];if(!activeWord||words.indexOf(activeWord)===-1){var preferred=words.find(function(w){return w!==solutionWord;})||solutionWord;setActiveWord(preferred);}});
