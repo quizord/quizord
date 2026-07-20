@@ -61,7 +61,7 @@
         .clue-item { display: flex; align-items: center; gap: clamp(4px, 1vw, 7px); margin-bottom: clamp(3px, 0.7vw, 5px); padding: clamp(3px, 0.7vw, 6px) clamp(5px, 1vw, 9px); border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: clamp(0.85rem, 1.3vw, 1.1rem); }
         .clue-item:hover { background: #ecf0f1; transform: translateX(4px); }
         .clue-item.active-clue { border-left-color: #3498db; background: #e8f4fd; }
-        .clue-item.correct-clue { border-left-color: #28a745; background: #00d000; }
+        .clue-item.correct-clue { border-left-color: #28a745; background: #00b500; }
         .clue-number { display: inline-flex; align-items: center; justify-content: center; width: clamp(20px, 2.3vw, 26px); height: clamp(20px, 2.3vw, 26px); background: #7ec1f8; color: #400040; border-radius: 5px; font-size: clamp(0.8rem, 1.3vw, 1.1rem); }
         .clue-text { font-weight: normal; flex: 1; color: #2c3e50; }
         .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: clamp(50px, 6.5vw, 65px); padding: clamp(1px, 0.3vw, 3px) clamp(3px, 0.7vw, 4px); text-align: center; font-size: clamp(0.75rem, 1.3vw, 0.95rem); color: #2c3e50; white-space: nowrap; }
@@ -100,7 +100,7 @@
         <div class="banner-center">"KUNDE GÅ PÅ GRUND AV STEN OCH TRÄ"</div>
         <div class="banner-right" id="helpBtn" title="Instruktioner">?</div>
     </div>
-    <div id="helpModal" class="modal"><div class="modal-content"><span class="close" id="closeModal">&times;</span><h3>🧩 Så här löser du QuizOrd</h3><p style="white-space: pre-line;">1. Läs rubriken högst upp i den färgade bannern – en kryptisk ordnöt som det gäller att knäcka.
+    <div id="helpModal" class="modal"><div class="modal-content"><span class="close" id="closeModal">&times;</span><h3>🧩 Så här löser du</h3><p style="white-space: pre-line;">1. Läs rubriken högst upp i den färgade bannern – en kryptisk ordnöt som det gäller att knäcka.
 2. Lös korsordet för att få fram tre ledtrådar – Klicka på texten till frågan och skriv sedan in svaret.
 3. Ett rätt svar markerar texten till frågan –  För gåtans lösning kommer ett vinstmeddelande upp. 
 4. Bolla ledtrådarna och gåtan –  finns det något samband? 💡 Vilket ord börjar alltmer att träda fram?
@@ -121,9 +121,9 @@ Räknehjälp
     </div>
 </div>
 <script>
-    var puzzleText="KUNDE GÅ PÅ GRUND AV STEN OCH TRÄ"; var solutionWord="→PIRATER";
-    var clueData=[{"id":1,"text":"DRAS PÅ JOBB","answer":"1SKATT","sum":15},{"id":2,"text":"HAR FAnTOMENS ENA RING","answer":"2DÖSKALLE","sum":18},{"id":3,"text":"GÖR DET LÄTTA I VIND","answer":"3SEGLAR","sum":13}];
-    var grid=[[null,null,null,null,"2",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"D",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"Ö",null,null,null,null,null,null,null,null,null,null],[null,null,null,"1","S","K","A","T","T",null,null,null,null,null,null],[null,null,null,null,"K",null,null,null,null,null,null,null,null,null,null],["→","P","I","R","A","T","E","R",null,null,null,null,null,null,null],[null,null,null,null,"L",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"L",null,null,null,null,null,null,null,null,null,null],[null,null,"3","S","E","G","L","A","R",null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]]; var gridSize=15; var playerInputs={}; var activeWord=null; var winShown=false;
+    var puzzleText="KUNDE GÅ PÅ GRUND AV STEN OCH TRÄ"; var solutionWord="→PIRATEN";
+    var clueData=[{"id":1,"text":"DRAS PÅ JOBB","answer":"1SKATT","sum":15},{"id":2,"text":"HAR FANTOMENS ENA RING","answer":"2DÖSKALLE","sum":18},{"id":3,"text":"GÖR DET LÄTTA I VIND","answer":"3SEGLAR","sum":13}];
+    var grid=[[null,null,null,null,"2",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"D",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"Ö",null,null,null,null,null,null,null,null,null,null],[null,null,null,"1","S","K","A","T","T",null,null,null,null,null,null],[null,null,null,null,"K",null,null,null,null,null,null,null,null,null,null],["→","P","I","R","A","T","E","N",null,null,null,null,null,null,null],[null,null,null,null,"L",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,"L",null,null,null,null,null,null,null,null,null,null],[null,null,"3","S","E","G","L","A","R",null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]]; var gridSize=15; var playerInputs={}; var activeWord=null; var winShown=false;
     var givenCells={"3-3":"1","0-4":"2","8-2":"3","5-0":"→"};
     for(var cellId in givenCells) playerInputs[cellId]=givenCells[cellId];
     function getLetterValue(ch){var u=ch.toUpperCase();if("ABCDEF".indexOf(u)!==-1)return 1;if("GHIJKL".indexOf(u)!==-1)return 2;if("MNOPQR".indexOf(u)!==-1)return 3;if("STUVWX".indexOf(u)!==-1)return 4;if("YZÅÄÖ".indexOf(u)!==-1)return 5;return 0;}
