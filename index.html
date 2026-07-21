@@ -7,17 +7,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #8a8a8a; padding: clamp(6px, 1.2vw, 16px); width: 95%; max-width: 1100px; margin: 0 auto; font-size: clamp(1rem, 2.2vw, 1.25rem); display: flex; justify-content: center; min-height: 100vh; transition: background 0.3s; }
-        body.large-text { font-size: clamp(1.2rem, 2.8vw, 1.5rem); }
-        body.large-text td input { font-size: clamp(20px, 3.2vw, 30px); }
-        body.high-contrast { background: #ffffff; color: #000000; }
-        body.high-contrast .container { background: #ffffff; border: 2px solid #000; }
-        body.high-contrast .puzzle-banner { background: #000000; color: #ffffff; }
-        body.high-contrast .puzzle-banner .banner-center { color: #ffffff; }
-        body.high-contrast td { border-color: #000000; }
-        body.high-contrast td.active { background: #ffffff; }
-        body.high-contrast td.given { background: #cccccc; }
-        body.high-contrast td.solution-given { background: #000000; color: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background: #8a8a8a; padding: clamp(6px, 1.2vw, 16px); width: 95%; max-width: 1100px; margin: 0 auto; font-size: clamp(1rem, 2.2vw, 1.25rem); display: flex; justify-content: center; min-height: 100vh; transition: all 0.3s; }
+        
+        /* === FÖRSTORAT LÄGE === */
+        body.large-text { font-size: clamp(1.4rem, 3.5vw, 1.8rem); }
+        body.large-text .puzzle-banner { padding: clamp(10px, 2vw, 20px) clamp(12px, 2.5vw, 24px); }
+        body.large-text .banner-center { font-size: clamp(1.4rem, 3.5vw, 2rem); }
+        body.large-text td { 
+            width: clamp(52px, min(9vw, 10vh), 85px) !important; 
+            height: clamp(52px, min(9vw, 10vh), 85px) !important; 
+        }
+        body.large-text td input { font-size: clamp(24px, 4vw, 34px) !important; }
+        body.large-text td.given .given-letter { font-size: clamp(24px, 4vw, 34px) !important; }
+        body.large-text .clue-item { font-size: clamp(1.2rem, 2.5vw, 1.5rem); padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.5vw, 14px); }
+        body.large-text .clue-number { width: clamp(28px, 3.5vw, 36px); height: clamp(28px, 3.5vw, 36px); font-size: clamp(1.1rem, 2vw, 1.4rem); }
+        body.large-text .clue-sum-box { width: clamp(60px, 8vw, 80px); font-size: clamp(0.95rem, 1.8vw, 1.2rem); }
+        body.large-text .top-bar button { font-size: clamp(1rem, 2vw, 1.3rem); padding: clamp(8px, 1.5vw, 12px) clamp(14px, 2.5vw, 22px); }
+        body.large-text .val-number, body.large-text .val-letter { font-size: clamp(11px, 1.6vw, 14px); }
+        body.large-text .val-equals { font-size: clamp(11px, 1.6vw, 14px); }
+        body.large-text .win-message { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
+        
+        /* === HÖGKONTRAST === */
+        body.high-contrast { background: #ffffff !important; color: #000000 !important; }
+        body.high-contrast .container { background: #ffffff !important; border: 3px solid #000 !important; }
+        body.high-contrast .puzzle-banner { background: #000000 !important; color: #ffffff !important; }
+        body.high-contrast .puzzle-banner .banner-center { color: #ffffff !important; }
+        body.high-contrast .banner-right { background: #ffffff !important; color: #000000 !important; }
+        body.high-contrast td { border-color: #000000 !important; }
+        body.high-contrast td.active { background: #ffffff !important; }
+        body.high-contrast td.given { background: #cccccc !important; }
+        body.high-contrast td.solution-given { background: #000000 !important; color: #ffffff !important; }
+        body.high-contrast td.active[data-solution="true"]:not(.given):not(.solution-given) { background: #fff9c4 !important; }
+        body.high-contrast .clue-item { border-left: 4px solid #000 !important; background: #f5f5f5 !important; }
+        body.high-contrast .clue-item.correct-clue { background: #d4edda !important; border-left-color: #000 !important; }
+        body.high-contrast .clue-number { background: #000 !important; color: #fff !important; }
+        body.high-contrast .grid-wrapper { border-color: #000 !important; background: #ffffff !important; }
+        body.high-contrast .top-bar button { background: #000 !important; color: #fff !important; border: 2px solid #000 !important; }
+        body.high-contrast .win-message { background: #000 !important; color: #fff !important; }
+        
         .container { background: #c0c0c0; padding: clamp(10px, 1.5vw, 20px); border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 100%; max-width: 1100px; }
         .puzzle-banner { background: #000080; color: #ffffff; padding: clamp(6px, 1.2vw, 12px) clamp(8px, 1.5vw, 16px); border-radius: 10px; margin-bottom: clamp(6px, 1.2vw, 12px); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; flex-wrap: wrap; gap: 5px; }
         .logo-banner { background: transparent; padding: 0; border-radius: 0; display: flex; align-items: center; justify-content: center; box-shadow: none; width: auto; flex-shrink: 0; }
@@ -71,7 +98,7 @@
         .clue-item { display: flex; align-items: center; gap: clamp(4px, 1vw, 7px); margin-bottom: clamp(3px, 0.7vw, 5px); padding: clamp(3px, 0.7vw, 6px) clamp(5px, 1vw, 9px); border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: clamp(0.9rem, 1.4vw, 1.15rem); }
         .clue-item:hover { background: #ecf0f1; transform: translateX(4px); }
         .clue-item.active-clue { border-left-color: #3498db; background: #e8f4fd; }
-        .clue-item.correct-clue { border-left-color: #28a745; background: #1eae45; }
+        .clue-item.correct-clue { border-left-color: #28a745; background: #7ee99c; }
         .clue-number { display: inline-flex; align-items: center; justify-content: center; width: clamp(20px, 2.3vw, 26px); height: clamp(20px, 2.3vw, 26px); background: #7ec1f8; color: #400040; border-radius: 5px; font-size: clamp(0.8rem, 1.3vw, 1.1rem); }
         .clue-text { font-weight: normal; flex: 1; color: #2c3e50; }
         .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: clamp(50px, 6.5vw, 65px); padding: clamp(1px, 0.3vw, 3px) clamp(3px, 0.7vw, 4px); text-align: center; font-size: clamp(0.75rem, 1.3vw, 0.95rem); color: #2c3e50; white-space: nowrap; }
@@ -155,7 +182,7 @@ Räknehjälp
     function findWordForCell(cellId){var words=cellWords[cellId]||[];if(activeWord&&words.indexOf(activeWord)!==-1)return activeWord;return words.length>0?words[0]:null;}
     function isWordFilled(word){if(!word||!allWordInputs[word])return false;var inputs=allWordInputs[word];for(var i=0;i<inputs.length;i++){if(!inputs[i].value||inputs[i].value.trim()==='')return false;}return true;}
     
-    // ===== TV-VÄNLIG handleInput =====
+    // ===== TV-VÄNLIG handleInput – tangentbordet stannar stängt =====
     function handleInput(input){
         var rawValue = input.value;
         var cleanValue = rawValue.toUpperCase().replace(/[^A-ZÅÄÖ0-9\-]/g, '');
@@ -168,38 +195,17 @@ Räknehjälp
             var arr = allWordInputs[activeWord];
             var idx = arr.indexOf(input);
             if(idx !== -1 && idx < arr.length - 1){
+                // Flytta till nästa ruta i samma ord
                 arr[idx + 1].focus();
                 arr[idx + 1].select();
             } else if(idx === arr.length - 1 && isWordFilled(activeWord)){
+                // SISTA BOKSTAVEN – stäng tangentbordet och stanna
                 input.blur();
-                setTimeout(function(){
-                    moveToNextWord();
-                }, 200);
+                // Ingen automatisk flytt till nästa ord – spelaren får själv navigera
             }
         }
         updateAllFilledStatus();
         renderGame();
-    }
-    
-    function moveToNextWord(){
-        if(!activeWord) return;
-        var currentIdx = wordOrder.indexOf(activeWord);
-        if(currentIdx === -1) return;
-        var nextIdx = (currentIdx + 1) % wordOrder.length;
-        var nextWord = wordOrder[nextIdx];
-        if(allWordInputs[nextWord] && allWordInputs[nextWord].length > 0){
-            setActiveWord(nextWord);
-            var inputs = allWordInputs[nextWord];
-            var target = inputs[0];
-            for(var i = 0; i < inputs.length; i++){
-                if(!inputs[i].value || inputs[i].value.trim() === ''){
-                    target = inputs[i];
-                    break;
-                }
-            }
-            target.focus();
-            target.select();
-        }
     }
 
     function renderGame(){var allInputs=document.querySelectorAll('#crosswordGrid input');for(var i=0;i<allInputs.length;i++){var inp=allInputs[i];inp.value=playerInputs[inp.dataset.cellId]||'';}for(var j=0;j<clueData.length;j++){var clue=clueData[j];var liveSpan=document.getElementById('sum-live-'+clue.answer);if(liveSpan){var currentSum=0;var inputs=allWordInputs[clue.answer]||[];for(var k=0;k<inputs.length;k++){var val=inputs[k].value.trim().toUpperCase();if(val)currentSum+=getLetterValue(val);}liveSpan.textContent=currentSum+' / '+clue.sum;}}}
@@ -312,10 +318,7 @@ Räknehjälp
                     
                     if(e.key === 'Enter'){
                         e.preventDefault();
-                        if(activeWord && isWordFilled(activeWord)){
-                            this.blur();
-                            setTimeout(function(){ moveToNextWord(); }, 150);
-                        }
+                        this.blur();
                         return;
                     }
                     
