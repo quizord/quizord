@@ -33,7 +33,7 @@
         
         .container { background: #c0c0c0; padding: clamp(10px, 1.5vw, 20px); border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 100%; max-width: 1100px; }
         
-        #normal-view .puzzle-banner { background: #000080; color: #ffffff; padding: clamp(6px, 1.2vw, 12px) clamp(8px, 1.5vw, 16px); border-radius: 10px; margin-bottom: clamp(6px, 1.2vw, 12px); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; flex-wrap: wrap; gap: 5px; }
+        #normal-view .puzzle-banner { background: #000080; color: #ffffff; padding: clamp(6px, 1.2vw, 12px) clamp(8px, 1.5vw, 16px); border-radius: 10px; margin-bottom: clamp(6px, 1.2vw, 12px); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; flex-wrap: wrap; gap: 5px; position: relative; }
         .logo-banner { background: transparent; padding: 0; border-radius: 0; display: flex; align-items: center; justify-content: center; box-shadow: none; width: auto; flex-shrink: 0; }
         .logo-img { height: clamp(38px, 5.5vw, 60px); width: auto; display: block; }
         .logo-fallback { display: none; font-size: 1.1rem; font-weight: 800; color: #ffffff; text-align: center; line-height: 1.2; }
@@ -44,14 +44,42 @@
         
         @media print { .banner-right { display: none !important; } }
         
+        /* === MOBILVÄNLIG LAYOUT === */
         @media (max-width: 500px) {
-            .puzzle-banner { flex-direction: column; align-items: center; text-align: center; padding: clamp(5px, 1vw, 8px); }
-            .logo-banner { width: 100%; justify-content: center; margin-bottom: 2px; }
-            .logo-img { height: clamp(32px, 8vw, 46px); }
-            .banner-center { width: 100%; padding: 3px 5px; font-size: clamp(0.9rem, 3vw, 1.2rem); }
-            .banner-right { position: absolute; top: clamp(3px, 1vw, 7px); right: clamp(3px, 1vw, 7px); }
-            .puzzle-banner { position: relative; padding-top: clamp(34px, 10vw, 46px); }
-            .logo-banner { position: absolute; top: clamp(2px, 0.7vw, 5px); left: 0; right: 0; }
+            .puzzle-banner { 
+                flex-direction: row; 
+                flex-wrap: wrap;
+                align-items: center; 
+                text-align: center; 
+                padding: clamp(8px, 2vw, 12px) clamp(8px, 2vw, 12px); 
+                min-height: auto;
+            }
+            .logo-banner { 
+                width: auto; 
+                justify-content: flex-start; 
+                margin-bottom: 0; 
+                position: static;
+                flex-shrink: 0;
+            }
+            .logo-img { height: clamp(30px, 7vw, 42px); }
+            .banner-center { 
+                width: auto; 
+                flex: 1 1 60%; 
+                padding: 3px 5px; 
+                font-size: clamp(0.85rem, 2.5vw, 1.1rem); 
+                min-width: 120px;
+            }
+            .banner-right { 
+                position: static;
+                flex-shrink: 0;
+            }
+            .puzzle-banner { 
+                position: relative; 
+                padding-top: clamp(8px, 2vw, 12px); 
+            }
+            .logo-banner { 
+                position: static;
+            }
         }
         .top-bar { display: flex; align-items: center; gap: 8px; margin-bottom: clamp(6px, 1.2vw, 10px); flex-wrap: wrap; }
         .top-bar button { background: #ecf0f1; border: none; border-radius: 6px; padding: clamp(5px, 1vw, 8px) clamp(10px, 1.5vw, 16px); cursor: pointer; font-weight: 600; color: #2c3e50; transition: 0.2s; font-size: clamp(0.9rem, 1.5vw, 1.05rem); }
@@ -87,7 +115,7 @@
         .clue-item { display: flex; align-items: center; gap: clamp(4px, 1vw, 7px); margin-bottom: clamp(3px, 0.7vw, 5px); padding: clamp(3px, 0.7vw, 6px) clamp(5px, 1vw, 9px); border-left: 4px solid #bdc3c7; background: #f8f9fa; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Futura', 'Trebuchet MS', 'Arial', sans-serif; font-size: clamp(0.9rem, 1.4vw, 1.15rem); }
         .clue-item:hover { background: #ecf0f1; transform: translateX(4px); }
         .clue-item.active-clue { border-left-color: #3498db; background: #e8f4fd; }
-        .clue-item.correct-clue { border-left-color: #28a745; background: #44df6f; }
+        .clue-item.correct-clue { border-left-color: #28a745; background: #1cd971; }
         .clue-number { display: inline-flex; align-items: center; justify-content: center; width: clamp(20px, 2.3vw, 26px); height: clamp(20px, 2.3vw, 26px); background: #7ec1f8; color: #400040; border-radius: 5px; font-size: clamp(0.8rem, 1.3vw, 1.1rem); }
         .clue-text { font-weight: normal; flex: 1; color: #2c3e50; }
         .clue-sum-box { background: white; border: 1px solid #ddd; border-radius: 6px; width: clamp(50px, 6.5vw, 65px); padding: clamp(1px, 0.3vw, 3px) clamp(3px, 0.7vw, 4px); text-align: center; font-size: clamp(0.75rem, 1.3vw, 0.95rem); color: #2c3e50; white-space: nowrap; }
@@ -115,7 +143,7 @@
         #focus-mode { display: none; margin-top: clamp(8px, 1.5vw, 16px); }
         .focus-banner { background: #000080; color: #ffffff; padding: clamp(10px, 2vw, 20px) clamp(12px, 2vw, 24px); border-radius: 10px; text-align: center; font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: bold; margin-bottom: clamp(10px, 2vw, 20px); letter-spacing: 0.02em; }
         .focus-row { display: flex; align-items: center; gap: clamp(6px, 1.2vw, 12px); margin-bottom: clamp(8px, 1.5vw, 14px); padding: clamp(8px, 1.2vw, 12px); background: #f8f9fa; border-radius: 8px; border-left: 4px solid #000080; flex-wrap: wrap; transition: all 0.3s; }
-        .focus-row.correct { border-left-color: #27ae60; background: #44df6f; }
+        .focus-row.correct { border-left-color: #27ae60; background: #1cd971; }
         .focus-solution { background: #fffab7; }
         .focus-solution.correct { background: #fff3cd; border-left-color: #f39c12; }
         .focus-label { font-weight: 600; font-size: clamp(1rem, 2.2vw, 1.3rem); min-width: clamp(100px, 20vw, 180px); color: #2c3e50; cursor: pointer; }
